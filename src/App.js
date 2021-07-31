@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/restaurants" className="navbar-brand">
+          <a href="/" className="navbar-brand">
             WhatsToEat
           </a>
           <div className="navbar-nav mr-auto">
@@ -32,8 +32,8 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "restaurants"]} component={RestaurantList} />
-            <Route exact path="add" component={AddRestaurant} />
+            <Route exact path="/restaurants" component={RestaurantList} />
+            <Route exact path="/add" component={AddRestaurant} />
             <Route path="/restaurants/:id" component={Restaurant} />
           </Switch>
         </div>

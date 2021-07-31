@@ -32,14 +32,12 @@ export default class Restaurant extends Component {
     onChangeName(e) {
         const name = e.target.value;
 
-        this.setState(function(prevState) {
-            return {
+        this.setState(prevState => ({
                 currentRestaurant: {
                     ...prevState.currentRestaurant,
                     name: name
-                }
-            };
-        });
+            }
+        }));
     }
 
     onChangeWebsite(e) {
@@ -178,6 +176,13 @@ export default class Restaurant extends Component {
                             className="badge badge-success"
                             onClick={this.updateRestaurant}>
                             Update
+                        </button>
+
+                        <button
+                            type="submit"
+                            className="badge badge=danger mr-2"
+                            onClick={this.deleteRestaurant}>
+                            Delete
                         </button>
                         <p>{this.state.message}</p>
                     </div>

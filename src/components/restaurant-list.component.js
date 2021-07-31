@@ -11,7 +11,7 @@ export default class RestaurantList extends Component {
         this.setActiveRestaurant = this.setActiveRestaurant.bind(this);
         this.searchCity = this.searchCity.bind(this);
 
-        this.setState = {
+        this.state = {
             restaurants: [],
             currentRestaurant: null,
             currentIndex: -1,
@@ -145,7 +145,7 @@ export default class RestaurantList extends Component {
 
                             <Link
                                 to={"/restaurants/" + currentRestaurant.id}
-                                className="badge badge-warning">
+                                className="badge badge-success">
                                 Edit
                             </Link>
                         </div>

@@ -18,6 +18,7 @@ export default class AddRestaurant extends Component {
             website: "",
             address: "",
             city: "",
+            // zip_code: null,
 
             submitted: false
         };
@@ -47,17 +48,26 @@ export default class AddRestaurant extends Component {
         })
     }
 
+    // onChangeZipCode(e) {
+    //     this.setState({
+    //         zip_code: e.target.value
+    //     })
+    // }
+
     saveRestaurant() {
         const data = {
-            name: this.state.title,
-            // website: this.state.website
+            name: this.state.name,
+            website: this.state.website,
+            address: this.state.address,
+            city: this.state.city
         };
 
         RestaurantDataService.create(data)
             .then(response => {
                 this.setState({
                     id: response.data.id,
-                    website: response.data.title,
+                    name: response.data.name,
+                    website: response.data.website,
                     address: response.data.address,
                     city: response.data.city,
                     
@@ -65,7 +75,7 @@ export default class AddRestaurant extends Component {
                 });
                 console.log(response.data);
             })
-            .cattch(e => {
+            .catch(e => {
                 console.log(e);
             });
     }
@@ -121,7 +131,7 @@ export default class AddRestaurant extends Component {
                         <div className="form-group">
                             <label htmlFor="address">Address</label>
                             <input 
-                                type="address"
+                                type="text"
                                 className="formControl"
                                 id="address"
                                 required value={this.state.address}
@@ -141,6 +151,18 @@ export default class AddRestaurant extends Component {
                                 name="city"
                             />
                         </div>
+{/* 
+                        <div className="form-group">
+                            <label htmlFor="city">Zip Code</label>
+                            <input 
+                                type="text"
+                                className="formControl"
+                                id="zip_code"
+                                required value={this.state.zip_code}
+                                onChange={this.onChangeZipCode}
+                                name="zip_code"
+                            />
+                        </div> */}
 
                         <button onClick={this.saveRestaurant} className="btn btn-success">
                             Submit
