@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* .react-select {
+  margin: 2rem;
+  position: absolute;
+  width: 30rem;
+} */
+
+/* .react-select
+  .react-select__control--is-focused.react-select__control--menu-is-open {
+  border-color: red;
+  box-shadow: 0 0 10px 1px pink;
+} */

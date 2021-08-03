@@ -27,6 +27,10 @@ class RestaurantDataService {
     findByCity(city) {
         return http.get(`/restaurants?city=${city}`);
     }
+
+    getAllCities() {
+        return http.get("/restaurants/city")
+    }
 }
 
 export default new RestaurantDataService();

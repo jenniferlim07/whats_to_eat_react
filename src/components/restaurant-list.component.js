@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
 import { Link } from "react-router-dom";
+import '../index.css';
+import Select from 'react-select';
 
 export default class RestaurantList extends Component {
     constructor(props) {
@@ -10,17 +12,22 @@ export default class RestaurantList extends Component {
         this.refreshList = this.refreshList.bind(this);
         this.setActiveRestaurant = this.setActiveRestaurant.bind(this);
         this.searchCity = this.searchCity.bind(this);
+        this.retrieveCities = this.retrieveCities.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             restaurants: [],
             currentRestaurant: null,
             currentIndex: -1,
-            searchCity: ""
+            searchCity: "",
+            cities: []
         };
     }
 
     componentDidMount() {
         this.retrieveRestaurants();
+        this.retrieveCities();
     }
 
     onChangeSearchCity(e) {
@@ -59,8 +66,9 @@ export default class RestaurantList extends Component {
         });
     }
 
-    searchCity() {
-        RestaurantDataService.findByCity(this.state.searchCity)
+    searchCity(event) {
+        // debugger;
+        RestaurantDataService.findByCity(this.state.selectedOption)
             .then(response => {
                 this.setState({
                     restaurants: response.data
@@ -70,31 +78,98 @@ export default class RestaurantList extends Component {
             .catch(e => {
                 console.log(e);
             });
+        event.preventDefault();
     }
+
+    retrieveCities() {
+        RestaurantDataService.getAllCities()
+        .then(response => {
+            this.setState({
+                cities: response.data,
+                selectedOption: response.data[0].city,
+            });
+        })
+        .catch(e => {
+            console.log(e)
+        });
+    }
+
+    // state = {
+    //     selectedOption: null,
+    // };
+
+    handleChange = (event) => {
+        // debugger;
+        this.setState({ selectedOption: event.target.value }, () =>
+            console.log('Option selected: ', event)
+        )
+    }
+
+    // handleChange(event) {
+    //     console.log(event)
+    //     this.setState({
+    //         value: event.target.value
+    //     });
+
+    // }
+
+    // handleSubmit(event) {
+    //     console.log("handleSubmit ", event);
+    //     // debugger;
+    //     event.preventDefault();
+    // }
 
 
     render() {
-        const { searchCity, restaurants, currentRestaurant, currentIndex } = this.state;
+        const { restaurants, currentRestaurant, currentIndex } = this.state;
 
         return (
             <div className="list row">
                 <div className="col-md-8">
                     <div className="input-group mb-3">
-                        <input 
+                        {/* <input 
                             type="text"
                             className="form-control"
                             placeholder="Search by city"
                             value={searchCity}
                             onChange={this.onChangeSearchCity}
-                        />
-                        <div className="input-group-append">
+                        /> */}
+
+                        <div className="container">
+                                <form onSubmit={this.searchCity}>
+                                    {/* <Select
+                                        value={this.state.selectedOption}
+                                        onChange={this.handleChange}
+                                        options={
+                                        this.state.cities.map((city, index) => {
+                                            return {
+                                                label: city.city,
+                                                value: city
+                                                // key: index
+                                            }
+                                        })
+                                    }
+                                    /> */}
+                                    <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                        value={this.state.selectedOption}
+                                        onChange={this.handleChange}>
+                                        {/* {citiesList} */}
+                                        {this.state.cities.map((city, index) => (
+                                            <option key={index} value={city.city}>{city.city}</option>
+                                        ))}
+                                    </select>
+                                    <input type="submit" value="Submit" />
+                                </form>
+                        </div>
+{/*                     <div className="input-group-append">
                             <button
                                 className="btn btn-outline-secondary"
                                 type="button"
+                                value={this.state.selectedOption}
                                 onClick={this.searchCity}>
                                 Search
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="col-md-6">
