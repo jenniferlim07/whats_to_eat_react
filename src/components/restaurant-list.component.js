@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
 import { Link } from "react-router-dom";
 import '../index.css';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 export default class RestaurantList extends Component {
     constructor(props) {
