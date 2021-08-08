@@ -71,7 +71,8 @@ export default class RestaurantList extends Component {
         RestaurantDataService.findByCity(this.state.selectedOption)
             .then(response => {
                 this.setState({
-                    restaurants: response.data
+                    restaurants: response.data,
+                    currentRestaurant: null
                 });
                 console.log(response.data)
             })
@@ -120,22 +121,16 @@ export default class RestaurantList extends Component {
     // }
 
 
+
     render() {
         const { restaurants, currentRestaurant, currentIndex } = this.state;
 
         return (
             <div className="list row">
                 <div className="col-md-8">
-                    <div className="input-group mb-3">
-                        {/* <input 
-                            type="text"
-                            className="form-control"
-                            placeholder="Search by city"
-                            value={searchCity}
-                            onChange={this.onChangeSearchCity}
-                        /> */}
+                    {/* <div className="input-group mb-3"> */}
 
-                        <div className="container">
+                        {/* <div className="container"> */}
                                 <form onSubmit={this.searchCity}>
                                     {/* <Select
                                         value={this.state.selectedOption}
@@ -160,7 +155,7 @@ export default class RestaurantList extends Component {
                                     </select>
                                     <input type="submit" value="Submit" />
                                 </form>
-                        </div>
+                        {/* </div> */}
 {/*                     <div className="input-group-append">
                             <button
                                 className="btn btn-outline-secondary"
@@ -170,7 +165,7 @@ export default class RestaurantList extends Component {
                                 Search
                             </button>
                         </div> */}
-                    </div>
+                    {/* </div> */}
                 </div>
                 <div className="col-md-6">
                     <h4>Restaurant List</h4>
@@ -203,7 +198,8 @@ export default class RestaurantList extends Component {
                                 <label>
                                     <strong>Website:</strong>
                                 </label>{" "}
-                                {currentRestaurant.website}
+                                <a target='_blank' href={currentRestaurant.website}>{currentRestaurant.website}</a>
+                                
                             </div>
                             <div>
                                 <label>
@@ -211,16 +207,15 @@ export default class RestaurantList extends Component {
                                 </label>{" "}
                                 {currentRestaurant.address}
                             </div>
-                            <div>
+                            {/* <div>
                                 <label>
                                     <strong>City:</strong>
                                 </label>{" "}
                                 {currentRestaurant.city}
-                            </div>
-
+                            </div> */}
                             <Link
                                 to={"/restaurants/" + currentRestaurant.id}
-                                className="badge badge-success">
+                                className="badge badge-light">
                                 Edit
                             </Link>
                         </div>

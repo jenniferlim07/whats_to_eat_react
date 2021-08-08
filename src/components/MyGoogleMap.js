@@ -8,6 +8,7 @@ import AutoComplete from './Autocomplete';
 import Marker from './Marker';
 
 import { Descriptions } from 'antd';
+import RestaurantDataService from "../services/restaurant.service";
 
 const API_KEY = process.env.REACT_APP_API_KEY
 const Wrapper = styled.main`
@@ -15,8 +16,15 @@ const Wrapper = styled.main`
     height: 100%;
 `;
 
-class MyGoogleMap extends Component {
 
+
+class MyGoogleMap extends Component {
+    constructor(props) {
+        super(props)
+        this.saveRestaurant = this.saveRestaurant.bind(this)
+        this.newRestaurant = this.newRestaurant.bind(this)
+
+    }
 
     state = {
         mapApiLoaded: false,
@@ -25,6 +33,7 @@ class MyGoogleMap extends Component {
         geoCoder: null,
         places: [],
         restaurant_name: '',
+        website: '',
         center: [],
         zoom: 9,
         address: '',
@@ -32,7 +41,9 @@ class MyGoogleMap extends Component {
         state: '',
         draggable: true,
         lat: null,
-        lng: null
+        lng: null,
+
+        submitted: false
     };
 
     componentWillMount() {
@@ -42,6 +53,53 @@ class MyGoogleMap extends Component {
             lat: 47.608013,
             lng: -122.335167,
         })
+    }
+
+    saveRestaurant() {
+        const data = {
+            name: this.state.restaurant_name,
+            website: this.state.website,
+            address: this.state.address,
+            city: this.state.city
+        };
+        // this.autoComplete = new mapApi.places.Autocomplete(
+        //     this.state.address,
+        // );
+
+        // const auto = this.autoComplete.getPlace()
+        console.log("potato ", data)
+
+        RestaurantDataService.create(data)
+            .then(response => {
+                this.setState({
+                    id: response.data.id,
+                    name: response.data.name, 
+                    website: response.data.website,
+                    address: response.data.address,
+                    city: response.data.city,
+
+                    submitted: true
+                    
+                });
+                console.log("saveRestaurant ", this.state.submitted)
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    newRestaurant() {
+        this.setState({
+            id: null,
+            name: "",
+            website: "",
+            address: "",
+            city: "",
+
+            submitted: false
+        });
+        console.log("newRestaurant ", this.submitted)
     }
 
 
@@ -83,9 +141,11 @@ class MyGoogleMap extends Component {
     };
 
     addPlace = (place) => {
+        console.log("addPlace ", place)
         this.setState({
             places: [place],
             restaurant_name: place.name,
+            website: place.website,
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng()
         });
@@ -171,6 +231,7 @@ class MyGoogleMap extends Component {
             <Wrapper>
                 {mapApiLoaded && (
                     <div>
+                        <h4>Restaurant Search</h4>
                         <AutoComplete className="auto-complete" map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
                     </div>
                 )}
@@ -210,12 +271,31 @@ class MyGoogleMap extends Component {
                         {/* <Descriptions.Item label="City">{this.state.city}</Descriptions.Item> */}
                         {/* <Descriptions.Item label="State">{this.state.state}</Descriptions.Item> */}
                         <Descriptions.Item label="Restaurant">{this.state.restaurant_name}</Descriptions.Item>
-
+                        <br />
                         <Descriptions.Item label="Address">{this.state.address}</Descriptions.Item>
                     </Descriptions>
                 </div>
+                <div className="submit-form">
+                    {this.state.submitted ? (
+                        <div>
+                            <h4>You submitted successfully!</h4>
+                            <button className="btn btn-success" onClick={this.newRestaurant}>
+                                Add
+                            </button>
+                        </div>
+                    ) : (
+                        <div>
+                        <button onClick={this.saveRestaurant} className="btn btn-success">
+                            Submit
+                        </button>
+                        </div>
+                    )}
+
+
+                </div>
 
             </Wrapper >
+
         );
     }
 }

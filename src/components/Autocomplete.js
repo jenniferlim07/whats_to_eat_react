@@ -20,7 +20,7 @@ class AutoComplete extends Component {
     componentDidMount({ map, mapApi } = this.props) {
         const options = {
             // restrict your search to a specific type of result
-            fields: ["name", "address_components", "geometry"],
+            fields: ["name", "url", "website", "address_components", "geometry"],
             types: ['establishment'],
             // restrict your search to a specific country, or an array of countries
             // componentRestrictions: { country: ['gb', 'us'] },
@@ -39,6 +39,8 @@ class AutoComplete extends Component {
 
     onPlaceChanged = ({ map, addplace } = this.props) => {
         const place = this.autoComplete.getPlace();
+        console.log("place ", place)
+        console.log("contact ", place.website)
 
         if (!place.geometry) return;
         if (place.geometry.viewport) {

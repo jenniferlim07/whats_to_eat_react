@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
+import { Route, Switch } from "react-router-dom";
+import MyGoogleMap from './MyGoogleMap';
 
 export default class AddRestaurant extends Component {
     constructor(props) {
@@ -61,6 +63,12 @@ export default class AddRestaurant extends Component {
             address: this.state.address,
             city: this.state.city
         };
+        // this.autoComplete = new mapApi.places.Autocomplete(
+        //     this.state.address,
+        // );
+
+        // const auto = this.autoComplete.getPlace()
+        // console.log("potato ", auto)
 
         RestaurantDataService.create(data)
             .then(response => {
@@ -169,7 +177,13 @@ export default class AddRestaurant extends Component {
                         </button>
                     </div>
                 )}
+                <Switch>
+                    <div className="main-wrapper">
+                        <Route exact path="/add" component={MyGoogleMap} />
+                    </div>
+                </Switch>
             </div>
+
         );
     }
 }

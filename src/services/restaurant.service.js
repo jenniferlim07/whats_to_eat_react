@@ -1,35 +1,43 @@
 import http from "../http-common";
+import axiosInstance from '../axios';
 
 class RestaurantDataService {
     getAll() {
-        return http.get("/restaurants");
+        // return http.get("/restaurants");
+        return axiosInstance.get("/restaurants")
     }
 
     get(id) {
-        return http.get(`/restaurants/${id}`);
+        // return http.get(`/restaurants/${id}`);
+        return axiosInstance.get(`/restaurants/${id}`);
     }
 
     create(data) {
-        return http.post("/restaurants", data);
+        // return http.post("/restaurants", data);
+        return axiosInstance.post("/restaurants", data);
     }
 
     update(id, data) {
-        return http.put(`/restaurants/${id}`, data);
+        // return http.put(`/restaurants/${id}`, data);
+        return axiosInstance.put(`/restaurants/${id}`, data);
     }
 
     delete(id) {
-        return http.delete(`/restaurants/${id}`);
+        // return http.delete(`/restaurants/${id}`);
+        return axiosInstance.delete(`/restaurants/${id}`);
     }
 
     // deleteAll() {
     //     return http.delete("/restaurants");
     // }
     findByCity(city) {
-        return http.get(`/restaurants?city=${city}`);
+        // return http.get(`/restaurants?city=${city}`);
+        return axiosInstance.get(`/restaurants?city=${city}`);
     }
 
     getAllCities() {
-        return http.get("/restaurants/city")
+        // return http.get("/restaurants/city")
+        return axiosInstance.get("/restaurants/city")
     }
 }
 

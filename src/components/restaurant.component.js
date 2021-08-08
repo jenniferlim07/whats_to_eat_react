@@ -140,7 +140,7 @@ export default class Restaurant extends Component {
                                     type="text"
                                     className="formControl"
                                     id="website"
-                                    required value={this.state.website}
+                                    required value={currentRestaurant.website}
                                     onChange={this.onChangeWebsite}
                                     name="website"
                                 />
@@ -152,9 +152,9 @@ export default class Restaurant extends Component {
                                     type="address"
                                     className="formControl"
                                     id="address"
-                                    required value={this.state.address}
+                                    value={currentRestaurant.address}
                                     onChange={this.onChangeAddress}
-                                    name="address"
+                                    // name="address"
                                 />
                             </div>
 
@@ -164,7 +164,7 @@ export default class Restaurant extends Component {
                                     type="text"
                                     className="formControl"
                                     id="city"
-                                    required value={this.state.city}
+                                    required value={currentRestaurant.city}
                                     onChange={this.onChangeCity}
                                     name="city"
                                 />
