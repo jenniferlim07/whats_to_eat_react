@@ -17,6 +17,7 @@ export default class RestaurantList extends Component {
         // this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
+            id: localStorage.getItem('id'),
             restaurants: [],
             currentRestaurant: null,
             currentIndex: -1,
@@ -39,6 +40,7 @@ export default class RestaurantList extends Component {
     }
 
     retrieveRestaurants() {
+        // console.log("*&*&*&*&* ", this.state.id)
         RestaurantDataService.getAll()
             .then(response => {
                 this.setState({

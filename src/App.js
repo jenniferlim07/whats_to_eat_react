@@ -21,8 +21,9 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/" className="navbar-brand">
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark justify-content-between">
+        <div class="navbar-collapse collapse dual-collapse2">
+          <a href="/login" className="navbar-brand">
             WhatsToEat
           </a>
           <div className="navbar-nav mr-auto">
@@ -37,6 +38,26 @@ class App extends Component {
               </Link>
             </li>
           </div>
+              </div>
+          <div class="navbar-collapse collapse dual-collapse2">
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/register"} className="nav-link">
+                Register
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/logout"} className="nav-link">
+                Logout
+              </Link>
+            </li>
+          </div>
+        </div>
         </nav>
 
         <div className="container mt-3">
@@ -48,7 +69,6 @@ class App extends Component {
             <Route exact path="/restaurants" component={RestaurantList} />
             {/* <Route exact path="/add" component={AddRestaurant} /> */}
             <Route path="/restaurants/:id" component={Restaurant} />
-            {/* <Route exact path="/" component={Maps} /> */}
             <div className="main-wrapper">
             {/* <Route exact path="/" component={MyGoogleMap} /> */}
               <Route exact path="/add" component={MyGoogleMap} />

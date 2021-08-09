@@ -43,6 +43,12 @@ export default function SignIn() {
 
 	const [formData, updateFormData] = useState(initialFormData);
 
+	// function getCurrentUser(id) {
+	// 	const user = id;
+	// 	console.log("*** USER ", user);
+	// 	return user;
+	// }
+
 	const handleChange = (e) => {
 		updateFormData({
 			...formData,
@@ -52,7 +58,7 @@ export default function SignIn() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData);
+		// console.log(formData);
 
 		axiosInstance
 			.post(`/api/token/`, {
@@ -62,11 +68,15 @@ export default function SignIn() {
 			.then((res) => {
 				localStorage.setItem('access_token', res.data.access);
 				localStorage.setItem('refresh_token', res.data.refresh);
+				localStorage.setItem('id', res.data.id);
+				localStorage.setItem('user_name', res.data.user_name);
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
 				history.push('/');
-				//console.log(res);
-				//console.log(res.data);
+				// console.log(res);
+				console.log(res.data);
+				// console.log(res.data.id)
+				// getCurrentUser(res.data.id)
 			});
 	};
 

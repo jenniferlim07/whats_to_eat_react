@@ -15,7 +15,7 @@ export default class AddRestaurant extends Component {
         this.newRestaurant = this.newRestaurant.bind(this)
 
         this.state = {
-            id: null,
+            user: localStorage.getItem('id'),
             name: "",
             website: "",
             address: "",
@@ -58,6 +58,7 @@ export default class AddRestaurant extends Component {
 
     saveRestaurant() {
         const data = {
+            user: localStorage.getItem('id'), 
             name: this.state.name,
             website: this.state.website,
             address: this.state.address,
@@ -68,12 +69,12 @@ export default class AddRestaurant extends Component {
         // );
 
         // const auto = this.autoComplete.getPlace()
-        // console.log("potato ", auto)
+        console.log("@@@@@@ ", this.state.user)
 
         RestaurantDataService.create(data)
             .then(response => {
                 this.setState({
-                    id: response.data.id,
+                    user: localStorage.getItem('id'),
                     name: response.data.name,
                     website: response.data.website,
                     address: response.data.address,
@@ -81,7 +82,7 @@ export default class AddRestaurant extends Component {
                     
                     submitted: true
                 });
-                console.log(response.data);
+                console.log("response ", response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -90,7 +91,7 @@ export default class AddRestaurant extends Component {
 
     newRestaurant() {
         this.setState({
-            id: null,
+            user: localStorage.getItem('id'),
             name: "",
             website: "",
             address: "",

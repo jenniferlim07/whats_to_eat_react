@@ -31,6 +31,7 @@ class MyGoogleMap extends Component {
         mapInstance: null,
         mapApi: null,
         geoCoder: null,
+        user: localStorage.getItem('id'),
         places: [],
         restaurant_name: '',
         website: '',
@@ -57,6 +58,7 @@ class MyGoogleMap extends Component {
 
     saveRestaurant() {
         const data = {
+            user: this.state.user,
             name: this.state.restaurant_name,
             website: this.state.website,
             address: this.state.address,
@@ -77,6 +79,7 @@ class MyGoogleMap extends Component {
                     website: response.data.website,
                     address: response.data.address,
                     city: response.data.city,
+                    user: this.state.user,
 
                     submitted: true
                     
@@ -92,6 +95,7 @@ class MyGoogleMap extends Component {
     newRestaurant() {
         this.setState({
             id: null,
+            user: this.state.user,
             name: "",
             website: "",
             address: "",
