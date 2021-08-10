@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/whatstoeat/static/css/main.a4c783a3.chunk.css",
+    "main.js": "/whatstoeat/static/js/main.735e0e9a.chunk.js",
+    "main.js.map": "/whatstoeat/static/js/main.735e0e9a.chunk.js.map",
+    "runtime-main.js": "/whatstoeat/static/js/runtime-main.93139f33.js",
+    "runtime-main.js.map": "/whatstoeat/static/js/runtime-main.93139f33.js.map",
+    "static/css/2.095b53fd.chunk.css": "/whatstoeat/static/css/2.095b53fd.chunk.css",
+    "static/js/2.4fd5796e.chunk.js": "/whatstoeat/static/js/2.4fd5796e.chunk.js",
+    "static/js/2.4fd5796e.chunk.js.map": "/whatstoeat/static/js/2.4fd5796e.chunk.js.map",
+    "index.html": "/whatstoeat/index.html",
+    "static/css/2.095b53fd.chunk.css.map": "/whatstoeat/static/css/2.095b53fd.chunk.css.map",
+    "static/css/main.a4c783a3.chunk.css.map": "/whatstoeat/static/css/main.a4c783a3.chunk.css.map",
+    "static/js/2.4fd5796e.chunk.js.LICENSE.txt": "/whatstoeat/static/js/2.4fd5796e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.93139f33.js",
+    "static/css/2.095b53fd.chunk.css",
+    "static/js/2.4fd5796e.chunk.js",
+    "static/css/main.a4c783a3.chunk.css",
+    "static/js/main.735e0e9a.chunk.js"
+  ]
+}
