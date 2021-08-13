@@ -11,6 +11,9 @@ export default class Restaurant extends Component {
         this.getRestaurant = this.getRestaurant.bind(this);
         this.updateRestaurant = this.updateRestaurant.bind(this);
         this.deleteRestaurant = this.deleteRestaurant.bind(this);
+        this.retrieveCuisines = this.retrieveCuisines.bind(this);
+        this.setCuisine = this.setCuisine.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
         this.state = {
             currentRestaurant: {
@@ -19,14 +22,17 @@ export default class Restaurant extends Component {
                 website: "",
                 address: "",
                 city: "",
-
+                cuisine: '',
             },
+            cuisines: [],
+
             message: ""
         };
     }
 
     componentDidMount() {
         this.getRestaurant(this.props.match.params.id);
+        this.retrieveCuisines();
     }
 
     onChangeName(e) {
@@ -79,7 +85,9 @@ export default class Restaurant extends Component {
                 this.setState({
                     currentRestaurant: response.data
                 });
-                console.log(response.data)
+                console.log("get restaurant ", response.data)
+                console.log(this.state.currentRestaurant)
+                console.log(this.state.currentRestaurant.cuisine)
             })
             .catch(e => {
                 console.log(e);
@@ -112,6 +120,49 @@ export default class Restaurant extends Component {
             .catch(e => {
                 console.log(e);
             });
+    }
+
+    retrieveCuisines() {
+        RestaurantDataService.getAllCuisines()
+
+            .then(response => {
+                this.setState({
+                    cuisines: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    setCuisine(cuisine, index) {
+        console.log("set cuisine ", cuisine)
+        this.setState({
+            cuisine: cuisine,
+            currentIndex: index
+        })
+    }
+
+    handleChange(event) {
+        const data = {
+            id: this.state.currentRestaurant.id,
+            name: this.state.currentRestaurant.name,
+            website: this.state.currentRestaurant.website,
+            address: this.state.currentRestaurant.address,
+            city: this.state.currentRestaurant.city,
+
+            cuisine: event.target.value
+        };
+        // console.log(event.target.getAttribute("data-id").value)
+        console.log("event target ", event.target.value)
+
+        this.setState(prevState => ({
+            currentRestaurant: data
+        }))
+        // console.log("category", category)
+
+        event.preventDefault();
     }
 
     render() {
@@ -169,7 +220,65 @@ export default class Restaurant extends Component {
                                     name="city"
                                 />
                             </div>
+                            {/* <div className="form-group">
+                                <label htmlFor="city">Cuisine</label>
+                                <input 
+                                    type="text"
+                                    className="formControl"
+                                    id="cuisine"
+                                    required value={currentRestaurant.cuisine.map((cuisine) => {
+                                        return <li >{cuisine.type}</li>
+                                    })}
+                                    // onChange={this.onChangeCity}
+                                    name="cuisine"
+                                />
+                            </div> */}
+                            {/* <ul>
+                                <label>
+                                    <strong>Cuisines:</strong>
+                                </label>
+                                {currentRestaurant.cuisine.map((cuisine) => {
+                                    return <li >{cuisine.type}</li>
+                                })}
+                            </ul> */}
+
+                            {/* <div >
+                                <h4>Cuisine List</h4>
+                                <ul className="list-group">
+                                    {currentRestaurant && 
+                                        this.state.currentRestaurant.cuisine.map((cuisine) => (
+                                            <li
+                                                // className={
+                                                //     "list-group-item " +
+                                                //     (index === currentIndex ? "active" : "")
+                                                // }
+                                                // onClick={() => this.setActiveRestaurant(restaurant, index)}
+                                                // key={index}
+                                                >
+                                                {cuisine.type}
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div> */}
+
+
+
                         </form>
+
+
+                        <div className="container">
+                            <label htmlFor="city">Add Cuisine</label>
+                                <form onSubmit={this.setCuisine}>
+                                    <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                        value={this.state.cuisine}
+                                        onChange={this.handleChange}>
+                                        {this.state.cuisines.map((cuisine) => (
+                                            <option key={cuisine.id} value={cuisine.id}>{cuisine.type}</option>
+                                        ))}
+                                    </select>
+                                    {/* <input type="submit" value="Submit" /> */}
+                                </form>
+                        </div>
 
                         <button
                             type="submit"

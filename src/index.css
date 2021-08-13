@@ -1,25 +1,58 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.rowC{
+    display:flex; 
+    flex-direction:row;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+.bg {
+    /* background-image: url('./images/italian-food.jpeg');
+    height: 50vh;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-width: 50%; */
+    height: 100%;
+    background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('./images/indulge-restaurant.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-/* .react-select {
-  margin: 2rem;
-  position: absolute;
-  width: 30rem;
-} */
+body, html {
+    /* height: 100%; */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    box-sizing: border-box;
+}
 
-/* .react-select
-  .react-select__control--is-focused.react-select__control--menu-is-open {
-  border-color: red;
-  box-shadow: 0 0 10px 1px pink;
+.app {
+    height: 100%;
+    background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('./images/italian-food.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card {
+    background: whitesmoke;
+    width: 40%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 25px;
+    padding: 2%;
+    box-shadow: 10px 10px;
+}
+/* .heading {
+    display: flex;
+    align-items: center;
+    height: 582px;
+    font-family: 'Spartan', sans-serif;
 } */

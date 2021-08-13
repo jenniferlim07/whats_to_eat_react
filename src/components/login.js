@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import images from '../images/indulge-restaurant.jpg';
+import '../App.css';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -82,10 +84,18 @@ export default function SignIn() {
 
 	const classes = useStyles();
 
+	// if (localStorage.getItem('access_token')) {
+	// 	history.push('/homepage')
+	// }
+
 	return (
-		<Container component="main" maxWidth="xs">
-			<CssBaseline />
-			<div className={classes.paper}>
+		// <Container component="main" maxWidth="xs">
+		<Container>
+			{/* <CssBaseline /> */}
+			<div className="app">
+				<div className="card-login">
+
+			{/* <div className={classes.paper}> */}
 				<Avatar className={classes.avatar}></Avatar>
 				<Typography component="h1" variant="h5">
 					Sign in
@@ -142,7 +152,15 @@ export default function SignIn() {
 						</Grid>
 					</Grid>
 				</form>
+			{/* </div> */}
 			</div>
+			</div>
+			{/* <div className="landing-wrapper"
+			style={{ backgroundImage: `url(${images})`}}>
+			</div>         */}
+			{/* <img src={images} alt="Logo" /> */}
+			{/* <div className="bg"></div> */}
+
 		</Container>
 	);
 }

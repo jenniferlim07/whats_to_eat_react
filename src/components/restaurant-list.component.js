@@ -3,6 +3,7 @@ import RestaurantDataService from "../services/restaurant.service";
 import { Link } from "react-router-dom";
 import '../index.css';
 // import Select from 'react-select';
+import images from '../images/indulge-restaurant.jpg';
 
 export default class RestaurantList extends Component {
     constructor(props) {
@@ -17,7 +18,7 @@ export default class RestaurantList extends Component {
         // this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
-            id: localStorage.getItem('id'),
+            user: localStorage.getItem('id'),
             restaurants: [],
             currentRestaurant: null,
             currentIndex: -1,
@@ -40,9 +41,15 @@ export default class RestaurantList extends Component {
     }
 
     retrieveRestaurants() {
-        // console.log("*&*&*&*&* ", this.state.id)
+        console.log("*&*&*&*&* ", this.state.user)
+
         RestaurantDataService.getAll()
+
             .then(response => {
+                // const random_num = Math.floor(Math.random()* response.data.lenth)
+                // console.log("len ", random_num)
+                // const random = response.data[Math.floor(Math.random() * response.data.length)]
+                // console.log("ran ", random)
                 this.setState({
                     restaurants: response.data
                 });
@@ -76,7 +83,7 @@ export default class RestaurantList extends Component {
                     restaurants: response.data,
                     currentRestaurant: null
                 });
-                console.log(response.data)
+                console.log("search city", response.data)
             })
             .catch(e => {
                 console.log(e);
@@ -128,11 +135,14 @@ export default class RestaurantList extends Component {
         const { restaurants, currentRestaurant, currentIndex } = this.state;
 
         return (
+            // <div className='rowC'>
+            <div className="bg">
+            <div className="card">
             <div className="list row">
                 <div className="col-md-8">
                     {/* <div className="input-group mb-3"> */}
 
-                        {/* <div className="container"> */}
+                        <div className="container">
                                 <form onSubmit={this.searchCity}>
                                     {/* <Select
                                         value={this.state.selectedOption}
@@ -157,7 +167,7 @@ export default class RestaurantList extends Component {
                                     </select>
                                     <input type="submit" value="Submit" />
                                 </form>
-                        {/* </div> */}
+                        </div>
 {/*                     <div className="input-group-append">
                             <button
                                 className="btn btn-outline-secondary"
@@ -169,7 +179,7 @@ export default class RestaurantList extends Component {
                         </div> */}
                     {/* </div> */}
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-8">
                     <h4>Restaurant List</h4>
                     <ul className="list-group">
                         {restaurants &&
@@ -186,6 +196,7 @@ export default class RestaurantList extends Component {
                             ))}
                     </ul>
                 </div>
+
                 <div className="col=md-6">
                     {currentRestaurant ? (
                         <div>
@@ -215,6 +226,15 @@ export default class RestaurantList extends Component {
                                 </label>{" "}
                                 {currentRestaurant.city}
                             </div> */}
+                            <ul>
+                                <label>
+                                    <strong>Cuisines:</strong>
+                                </label>
+                                {/* {currentTutorial.category} */}
+                                {currentRestaurant.cuisine.map((cuisine) => {
+                                    return <li >{cuisine.type}</li>
+                                })}
+                            </ul>
                             <Link
                                 to={"/restaurants/" + currentRestaurant.id}
                                 className="badge badge-light">
@@ -228,6 +248,11 @@ export default class RestaurantList extends Component {
                         </div>
                     )}
                 </div>
+                </div>
+                {/* <div className="bg"></div> */}
+                {/* <img className="bg" src={images} alt="Food" /> */}
+                {/* <Wheel restaurants={this.state.restaurants}/> */}
+            </div>
             </div>
         );
     }

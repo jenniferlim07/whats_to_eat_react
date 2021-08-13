@@ -59,11 +59,13 @@ axiosInstance.interceptors.response.use(
 						.then((response) => {
 							localStorage.setItem('access_token', response.data.access);
 							localStorage.setItem('refresh_token', response.data.refresh);
-
+							// localStorage.setItem('id', response.data.id)
+							// localStorage.setItem('user_name', response.data.user_name)
 							axiosInstance.defaults.headers['Authorization'] =
 								'JWT ' + response.data.access;
 							originalRequest.headers['Authorization'] =
 								'JWT ' + response.data.access;
+							console.log("front user ", response.data.id)
 
 							return axiosInstance(originalRequest);
 						})

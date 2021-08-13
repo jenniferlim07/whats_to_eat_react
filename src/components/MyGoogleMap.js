@@ -10,6 +10,8 @@ import Marker from './Marker';
 import { Descriptions } from 'antd';
 import RestaurantDataService from "../services/restaurant.service";
 
+// import AddCuisine from "./add-cuisine";
+
 const API_KEY = process.env.REACT_APP_API_KEY
 const Wrapper = styled.main`
     width: 100%;
@@ -297,7 +299,6 @@ class MyGoogleMap extends Component {
 
 
                 </div>
-
             </Wrapper >
 
         );
