@@ -129,7 +129,7 @@ export default class Restaurant extends Component {
                 this.setState({
                     cuisines: response.data
                 });
-                console.log(response.data);
+                console.log("retrieve cuisines ", response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -157,9 +157,9 @@ export default class Restaurant extends Component {
         // console.log(event.target.getAttribute("data-id").value)
         console.log("event target ", event.target.value)
 
-        this.setState(prevState => ({
+        this.setState({
             currentRestaurant: data
-        }))
+        })
         // console.log("category", category)
 
         event.preventDefault();
@@ -268,7 +268,7 @@ export default class Restaurant extends Component {
 
                         <div className="container">
                             <label htmlFor="city">Add Cuisine</label>
-                                <form onSubmit={this.setCuisine}>
+                                <form >
                                     <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
                                         value={this.state.cuisine}
                                         onChange={this.handleChange}>
