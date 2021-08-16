@@ -34,6 +34,9 @@ export default class Homepage extends Component {
         this.retrieveCities = this.retrieveCities.bind(this);
         this.retrieveCuisines = this.retrieveCuisines.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.onChangeSearchCuisine = this.onChangeSearchCuisine.bind(this);
+        this.retrieveCuisines = this.retrieveCuisines.bind(this);
+        this.searchCuisine = this.searchCuisine.bind(this);
 
         this.state = {
             user: localStorage.getItem('id'),
@@ -43,7 +46,8 @@ export default class Homepage extends Component {
             searchCity: "",
             cities: [],
             random_restaurant: '',
-            cuisines: []
+            cuisines: [],
+            searchCuisine: "",
         };
     }
 
@@ -85,7 +89,7 @@ export default class Homepage extends Component {
             .then(response => {
                 this.setState({
                     restaurants: response.data,
-                    currentRestaurant: null,
+                    // currentRestaurant: null,
                     random_restaurant: response.data[Math.floor(Math.random() * response.data.length)]
                 });
                 console.log("search city", response.data)
@@ -129,6 +133,30 @@ export default class Homepage extends Component {
                 console.log(e);
             });
     }
+    onChangeSearchCuisine(e) {
+        const searchCuisine = e.target.value;
+
+        this.setState({
+            searchCuisine: searchCuisine
+        });
+    }
+    searchCuisine(event) {
+
+        console.log("***** ", this.state.selectedOption)
+        this.state.selectedOption = parseInt(this.state.selectedOption) + 1
+        RestaurantDataService.getRestaurants(this.state.selectedOption)
+            .then(response => {
+                this.setState({
+                    restaurants: response.data,
+                    random_restaurant: response.data[Math.floor(Math.random() * response.data.length)]
+                });
+                console.log("cuisine restaurant data ", response.data)
+            })
+            .catch(e => {
+                console.log(e);
+            })
+        event.preventDefault();
+    }
 
     // const classes = useStyles();
 
@@ -167,6 +195,23 @@ export default class Homepage extends Component {
                                     {/* {citiesList} */}
                                     {this.state.cities.map((city, index) => (
                                         <option key={index} value={city.city}>{city.city}</option>
+                                    ))}
+                                </select>
+                                <button className="submitBtn" type="submit" value="Submit">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+
+
+                        <h5>Surprise by Cuisine</h5>
+                        <div className="container">
+                            <form onSubmit={this.searchCuisine}>
+                                <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    value={this.state.selectedOption}
+                                    onChange={this.handleChange}>
+                                    {this.state.cuisines.map((cuisine, index) => (
+                                        <option key={index} value={index}>{cuisine.type}</option>
                                     ))}
                                 </select>
                                 <button className="submitBtn" type="submit" value="Submit">

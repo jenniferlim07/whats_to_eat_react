@@ -62,6 +62,11 @@ class RestaurantDataService {
         // return http.get(`/restaurants/${id}`);
         return axiosInstance.get(`/cuisines/${id}`);
     }
+
+    deleteCuisine(id) {
+        // return http.delete(`/restaurants/${id}`);
+        return axiosInstance.delete(`/cuisines/${id}`);
+    }
 }
 
 export default new RestaurantDataService();

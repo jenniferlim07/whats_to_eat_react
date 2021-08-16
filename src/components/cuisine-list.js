@@ -17,6 +17,7 @@ export default class CuisineList extends Component {
         // this.removeAllTutorials = this.removeAllTutorials.bind(this);
         // this.getCuisineRestaurants = this.getCuisineRestaurants.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        // this.deleteCuisine = this.deleteCuisine.bind(this);
 
         this.state = {
             cuisines: [],
@@ -89,8 +90,8 @@ export default class CuisineList extends Component {
     searchCuisine(event) {
 
         console.log("***** ", this.state.selectedOption)
-        this.state.selectedOption = parseInt(this.state.selectedOption) + 1
-        RestaurantDataService.getRestaurants(this.state.selectedOption)
+        const index = parseInt(this.state.selectedOption) + 1
+        RestaurantDataService.getRestaurants(index)
             .then(response => {
                 this.setState({
                     restaurants: response.data

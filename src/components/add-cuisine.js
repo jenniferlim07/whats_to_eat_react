@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
 import { Link } from "react-router-dom";
+import '../index.css';
 
 export default class AddCuisine extends Component {
     constructor(props) {
@@ -48,11 +49,14 @@ export default class AddCuisine extends Component {
     }
 
     setActiveCuisine(cuisine, index) {
+        // console.log("*** ", cuisine)
+        // console.log("*** ", index)
         this.setState({
             currentCuisine: cuisine,
             currentIndex: index
         })
-        console.log("*** ", this.state.currentCuisine)
+        // console.log("*** ", this.state.currentCuisine)
+        // console.log("*** ", this.state.currentIndex)
         // this.getCuisineRestaurants(this.state.currentIndex);
     }
 
@@ -87,10 +91,27 @@ export default class AddCuisine extends Component {
         });
         console.log("new submitted ", this.state.submitted)
     }
+    
+    deleteCuisine() {
+        // console.log("delete index, ", this.state.currentIndex)
+        // console.log("delete index, ", this.state.currentCuisine.id)
+        const index = parseInt(this.state.currentCuisine.id) + 1
+        console.log("index ", index)
+        RestaurantDataService.delete(index)
+            .then(response => {
+                console.log(response.data);
+                this.props.history.push("/addcuisine")
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
 
     render() {
         const { cuisines, currentCuisine, currentIndex } = this.state;
         return (
+            <div className="bg">
+            <div className="card">
             <div className="submit-form">
                 <h5>Add Cuisine Type</h5>
                 {this.state.submitted ? (
@@ -149,11 +170,14 @@ export default class AddCuisine extends Component {
                                 </label>{" "}
                                 {currentCuisine.type}
                             <Link
-                                to={"api/cuisine/" + currentCuisine.id}
+                                to={"/cuisines/" + currentCuisine.id}
                                 className="btn btn-outline-primary btn-sm">
                                 Edit
                             </Link>
                             </div>
+                            {/* <button value={currentCuisine.id} onClick={this.deleteCuisine} className="btn btn-success">
+                            Delete
+                        </button> */}
                         </div>
                     ) : (
                         <div>
@@ -162,6 +186,8 @@ export default class AddCuisine extends Component {
                         </div>
                     )}
                 </div>
+            </div>
+            </div>
             </div>
         );
     }

@@ -25,6 +25,7 @@
   background: whitesmoke;
   width: 40%;
   /* height: 20%; */
+  /* height: auto; */
   display: flex;
   align-items: center;
   flex-direction: column;
