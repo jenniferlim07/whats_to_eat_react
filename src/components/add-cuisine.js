@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
+import { Link } from "react-router-dom";
 
 export default class AddCuisine extends Component {
     constructor(props) {
@@ -7,19 +8,52 @@ export default class AddCuisine extends Component {
         this.onChangeType = this.onChangeType.bind(this);
         this.saveCuisine = this.saveCuisine.bind(this);
         this.newCuisine = this.newCuisine.bind(this);
+        this.retrieveCuisines = this.retrieveCuisines.bind(this);
+        this.setActiveCuisine = this.setActiveCuisine.bind(this);
 
         this.state = {
+            cuisines: [],
             id: null,
             type: "",
+            currentCuisine: null,
+            currentIndex: -1,
 
             submitted: false
         };
+    }
+
+    componentDidMount() {
+        this.retrieveCuisines();
+        // this.refreshList();
     }
 
     onChangeType(e) {
         this.setState({
             type: e.target.value
         });
+    }
+
+    retrieveCuisines() {
+        RestaurantDataService.getAllCuisines()
+            .then(response => {
+                this.setState({
+                    cuisines: response.data
+                });
+                console.log("retrieveCuisines ", response.data);
+                console.log(this.state.cuisines)
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    setActiveCuisine(cuisine, index) {
+        this.setState({
+            currentCuisine: cuisine,
+            currentIndex: index
+        })
+        console.log("*** ", this.state.currentCuisine)
+        // this.getCuisineRestaurants(this.state.currentIndex);
     }
 
     saveCuisine() {
@@ -55,6 +89,7 @@ export default class AddCuisine extends Component {
     }
 
     render() {
+        const { cuisines, currentCuisine, currentIndex } = this.state;
         return (
             <div className="submit-form">
                 <h5>Add Cuisine Type</h5>
@@ -85,11 +120,50 @@ export default class AddCuisine extends Component {
                         </button>
                     </div>
                 )}
+                    <div className="col-md-8">
+                        <h4>Cuisine List</h4>
+
+                        <ul className="list-group">
+                            {this.state.cuisines &&
+                                cuisines.map((cuisine, index) => (
+                                    <li
+                                        className={
+                                            "list-group-item " +
+                                            (index === currentIndex ? "active" : "")
+                                        }
+                                        onClick={() => this.setActiveCuisine(cuisine, index)}
+                                        key={index}>
+                                        {cuisine.type}
+                                    </li>
+                                ))}
+                        </ul>
+
+                </div>
+                <div className="col-md-6">
+                    {currentCuisine ? (
+                        <div>
+                            <h4>Cuisine</h4>
+                            <div>
+                                <label>
+                                    <strong>Type:</strong>
+                                </label>{" "}
+                                {currentCuisine.type}
+                            <Link
+                                to={"api/cuisine/" + currentCuisine.id}
+                                className="btn btn-outline-primary btn-sm">
+                                Edit
+                            </Link>
+                            </div>
+                        </div>
+                    ) : (
+                        <div>
+                            <br />
+                            <p>Please click on a Category...</p>
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }
-
-
-
 
 }

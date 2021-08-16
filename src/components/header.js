@@ -53,7 +53,7 @@ function Header() {
 						</Link>
 						
 					</Typography>
-					<nav>
+					{/* <nav>
 						<Link
 							color="textPrimary"
 							href="#"
@@ -83,7 +83,7 @@ function Header() {
 						to="/logout"
 					>
 						Logout
-					</Button>
+					</Button> */}
 				</Toolbar>
 			</AppBar>
 		</React.Fragment>
