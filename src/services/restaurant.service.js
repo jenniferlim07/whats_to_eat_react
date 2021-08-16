@@ -53,6 +53,15 @@ class RestaurantDataService {
     //     // return http.put(`/tutorial/${id}`, data);
     //     return axiosInstance.put(`/tutorials/${id}`, data)
     // }
+    getCuisine(id) {
+        // return http.get(`/restaurants/${id}`);
+        return axiosInstance.get(`api/cuisine/${id}`);
+    }
+
+    getRestaurants(id) {
+        // return http.get(`/restaurants/${id}`);
+        return axiosInstance.get(`/cuisines/${id}`);
+    }
 }
 
 export default new RestaurantDataService();

@@ -12,30 +12,30 @@ export default class CuisineList extends Component {
         this.refreshList = this.refreshList.bind(this);
         this.setActiveCuisine = this.setActiveCuisine.bind(this);
         // this.removeAllTutorials = this.removeAllTutorials.bind(this);
+        this.getCuisineRestaurants = this.getCuisineRestaurants.bind(this);
 
         this.state = {
             cuisines: [],
             currentCuisine: null,
             currentIndex: -1,
+            restaurants: [],
         };
     }
 
     componentDidMount() {
         this.retrieveCuisines();
+        // this.refreshList();
     }
 
 
     retrieveCuisines() {
-        // axiosInstance.get()
-
         RestaurantDataService.getAllCuisines()
-
             .then(response => {
-
                 this.setState({
                     cuisines: response.data
                 });
-                console.log(response.data);
+                console.log("retrieveCuisines ", response.data);
+                console.log(this.state.cuisines)
             })
             .catch(e => {
                 console.log(e);
@@ -48,6 +48,7 @@ export default class CuisineList extends Component {
             currentCuisine: null,
             currentIndex: -1
         })
+        // console.log("*** ", this.state.currentIndex)
     }
 
     setActiveCuisine(cuisine, index) {
@@ -55,6 +56,36 @@ export default class CuisineList extends Component {
             currentCuisine: cuisine,
             currentIndex: index
         })
+        // console.log("*** ", this.state.currentIndex)
+        this.getCuisineRestaurants(this.state.currentIndex);
+    }
+
+    // getRestaurant(id) {
+    //     RestaurantDataService.get(id)
+    //         .then(response => {
+    //             this.setState({
+    //                 currentRestaurant: response.data
+    //             });
+    //             console.log("get restaurant ", response.data)
+    //             console.log(this.state.currentRestaurant)
+    //             console.log(this.state.currentRestaurant.cuisine)
+    //         })
+    //         .catch(e => {
+    //             console.log(e);
+    //         });
+    // }
+
+    getCuisineRestaurants(id) {
+        RestaurantDataService.getRestaurants(id)
+            .then(response => {
+                this.setState({
+                    restaurants: response.data
+                });
+                console.log("cuisine restaurant data ", response.data)
+            })
+            .catch(e => {
+                console.log(e);
+            })
     }
 
     render() {
@@ -94,11 +125,24 @@ export default class CuisineList extends Component {
                                 </label>{" "}
                                 {currentCuisine.type}
                             </div>
+                            <ul>
+                                <label>
+                                    <strong>Restaurants:</strong>
+                                </label>
+                                {currentCuisine.restaurants.map((restaurant) => {
+                                    return <li key={restaurant}>{restaurant}</li>
+                                })}
+                            </ul>
 
                             <Link
                                 to={"api/cuisine/" + currentCuisine.id}
-                                className="badge badge-warning">
+                                className="btn btn-outline-primary btn-sm">
                                 Edit
+                            </Link>
+                            <Link
+                                to={"/cuisines/" + currentCuisine.id}
+                                className="btn btn-outline-primary btn-sm">
+                                Try This
                             </Link>
                         </div>
                     ) : (
@@ -110,7 +154,7 @@ export default class CuisineList extends Component {
                 </div>
                 
             </div>
-            <AddCuisine />
+            {/* <AddCuisine /> */}
             </div>
             </div>
             </div>

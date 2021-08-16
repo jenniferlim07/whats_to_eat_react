@@ -32,6 +32,7 @@ export default class Homepage extends Component {
         this.retrieveRestaurants = this.retrieveRestaurants.bind(this);
         this.searchCity = this.searchCity.bind(this);
         this.retrieveCities = this.retrieveCities.bind(this);
+        this.retrieveCuisines = this.retrieveCuisines.bind(this);
         this.handleChange = this.handleChange.bind(this);
 
         this.state = {
@@ -42,12 +43,14 @@ export default class Homepage extends Component {
             searchCity: "",
             cities: [],
             random_restaurant: '',
+            cuisines: []
         };
     }
 
     componentDidMount() {
         // this.retrieveRestaurants();
         this.retrieveCities();
+        this.retrieveCuisines();
     }
     
 
@@ -113,73 +116,83 @@ export default class Homepage extends Component {
         )
     }
 
+    retrieveCuisines() {
+        RestaurantDataService.getAllCuisines()
+
+            .then(response => {
+                this.setState({
+                    cuisines: response.data
+                });
+                console.log("cuisines ", response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
     // const classes = useStyles();
 
 
     render() {
         return (
             <div className="app">
-            <div className="card">
-
-                <h1 className="heading">{this.state.random_restaurant.name}</h1>
+                <div className="hm-card">
+            
+                    <h1 className="heading">
+                        <a target='_blank' href={this.state.random_restaurant.website}>
+                            {this.state.random_restaurant.name}
+                        </a>   
+                    </h1>
                 
-                <div className="col-md-8">
-                <Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={useStyles.submit}
-						onClick={this.retrieveRestaurants}
-					>
-						Surprise Me
-                </Button>
-                {/* <Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={useStyles.submit}
-						onClick={this.retrieveCities}
-					>
-						Pick by Location
-                </Button> */}
-                <br />
-                <h5>Surprise by Location</h5>
-                <div className="container">
-                    <form onSubmit={this.searchCity}>
-                        <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                            value={this.state.selectedOption}
-                            onChange={this.handleChange}>
-                            {/* {citiesList} */}
-                            {this.state.cities.map((city, index) => (
-                                <option key={index} value={city.city}>{city.city}</option>
-                            ))}
-                        </select>
-                        <input type="submit" value="Submit" />
-                    </form>
-                </div>
-                </div>
-                {/* <Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={useStyles.submit}
-						onClick={this.retrieveCuisines}
-					>
-						Pick by Cuisine
-                </Button> */}
-                {/* <button>Surprise Me</button>
-                <button>
-                    <span>Pick by Location</span>
-                </button>
-                <button>
-                    <span>Pick by Cuisine</span>
-                </button> */}
+                    <div className="col-md-8">
+                        <Button
+                                // className="submitBtn"
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                // className={useStyles.submit}
+                                onClick={this.retrieveRestaurants}
+                            >
+                                Surprise Me
+                        </Button>
+                        <br />
+                        <br />
+                        <h5>Surprise by Location</h5>
+                        <div className="container">
+                            <form onSubmit={this.searchCity}>
+                                <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    value={this.state.selectedOption}
+                                    onChange={this.handleChange}>
+                                    {/* {citiesList} */}
+                                    {this.state.cities.map((city, index) => (
+                                        <option key={index} value={city.city}>{city.city}</option>
+                                    ))}
+                                </select>
+                                <button className="submitBtn" type="submit" value="Submit">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+{/* 
+                        <div className="container">
+                            <form onSubmit={this.searchCity}>
+                                <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    value={this.state.selectedOption}
+                                    onChange={this.handleChange}>
+                                    {this.state.cuisines.map((cuisine, index) => (
+                                        <option key={index} value={cuisine.type}>{cuisine.type}</option>
+                                    ))}
+                                </select>
+                                <button className="submitBtn" type="submit" value="Submit">
+                                    Submit
+                                </button>
+                            </form>
+                        </div> */}
 
-            </div>
-            {/* </div> */}
+
+                    </div>                         
+                </div>
             </div>
         )
     }

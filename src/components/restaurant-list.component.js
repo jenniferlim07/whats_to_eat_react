@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
 import { Link } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 // import Select from 'react-select';
-import images from '../images/indulge-restaurant.jpg';
+// import images from '../images/indulge-restaurant.jpg';
 
 export default class RestaurantList extends Component {
     constructor(props) {
@@ -73,6 +74,7 @@ export default class RestaurantList extends Component {
             currentRestaurant: restaurant,
             currentIndex: index
         });
+        console.log("res current index ", this.state.currentIndex)
     }
 
     searchCity(event) {
@@ -138,11 +140,12 @@ export default class RestaurantList extends Component {
             // <div className='rowC'>
             <div className="bg">
             <div className="card">
-            <div className="list row">
+            {/* <div className="list row"> */}
                 <div className="col-md-8">
                     {/* <div className="input-group mb-3"> */}
-
+                        <h5>Restaurants by City</h5>
                         <div className="container">
+
                                 <form onSubmit={this.searchCity}>
                                     {/* <Select
                                         value={this.state.selectedOption}
@@ -158,26 +161,23 @@ export default class RestaurantList extends Component {
                                     }
                                     /> */}
                                     <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    // <select className="mdb-select md-form colorful-select dropdown-primary"
                                         value={this.state.selectedOption}
                                         onChange={this.handleChange}>
                                         {/* {citiesList} */}
+                                        {/* <option selected value="" disable selected>Choose a city</option> */}
                                         {this.state.cities.map((city, index) => (
+                                            
                                             <option key={index} value={city.city}>{city.city}</option>
                                         ))}
                                     </select>
-                                    <input type="submit" value="Submit" />
+                                    
+                                    {/* <input type="submit" value="Submit" /> */}
+                                    <button className="submitBtn" type="submit" value="Submit">
+                                        Submit
+                                    </button>
                                 </form>
                         </div>
-{/*                     <div className="input-group-append">
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                value={this.state.selectedOption}
-                                onClick={this.searchCity}>
-                                Search
-                            </button>
-                        </div> */}
-                    {/* </div> */}
                 </div>
                 <div className="col-md-8">
                     <h4>Restaurant List</h4>
@@ -232,12 +232,12 @@ export default class RestaurantList extends Component {
                                 </label>
                                 {/* {currentTutorial.category} */}
                                 {currentRestaurant.cuisine.map((cuisine) => {
-                                    return <li >{cuisine.type}</li>
+                                    return <li key={cuisine.id}>{cuisine.type}</li>
                                 })}
                             </ul>
                             <Link
                                 to={"/restaurants/" + currentRestaurant.id}
-                                className="badge badge-light">
+                                className="btn btn-outline-primary btn-sm">
                                 Edit
                             </Link>
                         </div>
@@ -252,7 +252,7 @@ export default class RestaurantList extends Component {
                 {/* <div className="bg"></div> */}
                 {/* <img className="bg" src={images} alt="Food" /> */}
                 {/* <Wheel restaurants={this.state.restaurants}/> */}
-            </div>
+            {/* </div> */}
             </div>
         );
     }

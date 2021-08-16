@@ -18,6 +18,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    /* object-fit: contain; */
+    /* bottom: 0; */
 }
 
 body, html {
@@ -39,6 +41,19 @@ body, html {
     text-align: center;
 }
 
+.hm-card {
+    background: whitesmoke;
+    width: 40%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 25px;
+    padding: 2%;
+    box-shadow: 10px 10px;
+    justify-content: center;
+}
+
 .card {
     background: whitesmoke;
     width: 40%;
@@ -50,9 +65,66 @@ body, html {
     padding: 2%;
     box-shadow: 10px 10px;
 }
+
+ul {
+    list-style-type: none;
+}
+
+/* .submitBtn{
+
+
+    height: 2rem;
+    color: red;
+    border: 0;
+    bottom: 0;
+
+
+
+
+} */
+
+.submitBtn{
+    display: inline-block;
+    width: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    /* position:absolute; */
+
+    margin: 0 0 2rem 0;
+    border-radius: 20px 20px 20px 20px; 
+}
+
+/* .submitBtn{
+    margin: 1rem 0 1rem 8rem;
+    margin-left: 52%;   
+    border-radius: 0 20px 20px 0; 
+} */
+
+.submitBtn:hover{
+    background-color: rgb(179, 200, 212);
+    transition: 1s background ease;
+}
 /* .heading {
     display: flex;
     align-items: center;
     height: 582px;
     font-family: 'Spartan', sans-serif;
 } */
+
+/* .list {
+    text-align: left;
+    max-width: 750px;
+    margin: left;
+}
+
+.submit-form {
+    max-width: 300px;
+    margin: auto;
+}
+
+
+.edit-form {
+    max-width: 300px;
+    margin: auto;
+} */
+

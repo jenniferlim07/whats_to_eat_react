@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
+import images from '../images/my_logo.jpg';
 
 const useStyles = makeStyles((theme) => ({
 	appBar: {
@@ -37,14 +38,18 @@ function Header() {
 						color="inherit"
 						noWrap
 						className={classes.toolbarTitle}
+
 					>
+
 						<Link
 							component={NavLink}
 							to="/"
 							underline="none"
 							color="textPrimary"
+							className="nav-link h5 link-secondary"
 						>
-							WhatsToEat
+							<img src={images} alt="Logo" />
+							{/* WhatsToEat */}
 						</Link>
 						
 					</Typography>

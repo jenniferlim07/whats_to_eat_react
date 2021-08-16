@@ -189,9 +189,9 @@ export default class Restaurant extends Component {
                                 <label htmlFor="website">Website</label>
                                 <input 
                                     type="text"
-                                    className="formControl"
+                                    className="form-control"
                                     id="website"
-                                    required value={currentRestaurant.website}
+                                    value={currentRestaurant.website}
                                     onChange={this.onChangeWebsite}
                                     name="website"
                                 />
@@ -201,7 +201,7 @@ export default class Restaurant extends Component {
                                 <label htmlFor="address">Address</label>
                                 <input 
                                     type="address"
-                                    className="formControl"
+                                    className="form-control"
                                     id="address"
                                     value={currentRestaurant.address}
                                     onChange={this.onChangeAddress}
@@ -213,9 +213,9 @@ export default class Restaurant extends Component {
                                 <label htmlFor="city">City</label>
                                 <input 
                                     type="text"
-                                    className="formControl"
+                                    className="form-control"
                                     id="city"
-                                    required value={currentRestaurant.city}
+                                    value={currentRestaurant.city}
                                     onChange={this.onChangeCity}
                                     name="city"
                                 />
@@ -224,19 +224,36 @@ export default class Restaurant extends Component {
                                 <label htmlFor="city">Cuisine</label>
                                 <input 
                                     type="text"
-                                    className="formControl"
+                                    className="form-control"
                                     id="cuisine"
-                                    required value={currentRestaurant.cuisine.map((cuisine) => {
-                                        return <li >{cuisine.type}</li>
-                                    })}
-                                    // onChange={this.onChangeCity}
+                                    required value=
+                                    {currentRestaurant.cuisine ? (<ul>
+                                        <label>
+                                            <strong>Cuisines</strong>
+                                        </label>
+        
+                                        {currentRestaurant.cuisine.map((cuisine) => {
+                                            return <li>{cuisine.type}</li>
+                                        })}
+                                    </ul>) : ('')}
                                     name="cuisine"
                                 />
                             </div> */}
+
+                            {/* {currentRestaurant.cuisine ? (<ul>
+                                <label>
+                                    <strong>Cuisines</strong>
+                                </label>
+
+                                {currentRestaurant.cuisine.map((cuisine) => {
+                                    return <li >{cuisine.type}</li>
+                                })}
+                            </ul>) : ('')} */}
                             {/* <ul>
                                 <label>
                                     <strong>Cuisines:</strong>
                                 </label>
+
                                 {currentRestaurant.cuisine.map((cuisine) => {
                                     return <li >{cuisine.type}</li>
                                 })}
@@ -282,14 +299,14 @@ export default class Restaurant extends Component {
 
                         <button
                             type="submit"
-                            className="badge badge-success"
+                            className="btn btn-outline-dark btn-sm"
                             onClick={this.updateRestaurant}>
                             Update
                         </button>
 
                         <button
                             type="submit"
-                            className="badge badge=danger mr-2"
+                            className="btn btn-outline-dark btn-sm"
                             onClick={this.deleteRestaurant}>
                             Delete
                         </button>

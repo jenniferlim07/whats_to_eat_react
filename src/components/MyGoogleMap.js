@@ -237,7 +237,7 @@ class MyGoogleMap extends Component {
             <Wrapper>
                 {mapApiLoaded && (
                     <div>
-                        <h4>Restaurant Search</h4>
+                        <h4 className="text-center">Restaurant Search</h4>
                         <AutoComplete className="auto-complete" map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
                     </div>
                 )}
