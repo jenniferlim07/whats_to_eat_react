@@ -46,13 +46,15 @@ class RestaurantDataService {
 
     getAllCuisines() {
         // return http.get("/tutorial");
-        return axiosInstance.get("/api/cuisine/")
+        // return axiosInstance.get("/api/cuisine/")
+        return axiosInstance.get("/cuisines")
     }
 
     // updateCuisine(id, data) {
     //     // return http.put(`/tutorial/${id}`, data);
-    //     return axiosInstance.put(`/tutorials/${id}`, data)
+    //     return axiosInstance.put(`/cuisines/${id}`, data)
     // }
+
     getCuisine(id) {
         // return http.get(`/restaurants/${id}`);
         return axiosInstance.get(`api/cuisine/${id}`);

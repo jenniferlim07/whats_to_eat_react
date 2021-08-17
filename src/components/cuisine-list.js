@@ -20,6 +20,7 @@ export default class CuisineList extends Component {
         // this.deleteCuisine = this.deleteCuisine.bind(this);
 
         this.state = {
+            user: localStorage.getItem('id'),
             cuisines: [],
             // currentCuisine: null,
             // currentIndex: -1,

@@ -18,6 +18,7 @@ export default class AddCuisine extends Component {
             type: "",
             currentCuisine: null,
             currentIndex: -1,
+            user: localStorage.getItem('id'),
 
             submitted: false
         };
@@ -62,6 +63,7 @@ export default class AddCuisine extends Component {
 
     saveCuisine() {
         const data = {
+            user: this.state.user,
             type: this.state.type
         };
 
@@ -71,6 +73,7 @@ export default class AddCuisine extends Component {
                 this.setState({
                     id: response.data.id,
                     type: response.data.type,
+                    user: this.state.user,
 
                     submitted: true
                 });
@@ -86,6 +89,7 @@ export default class AddCuisine extends Component {
         this.setState({
             id: null,
             type: "",
+            user: this.state.user,
 
             submitted: false
         });
