@@ -13,7 +13,8 @@ export default class Homepage extends Component {
         this.searchCity = this.searchCity.bind(this);
         this.retrieveCities = this.retrieveCities.bind(this);
         this.retrieveCuisines = this.retrieveCuisines.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeCity = this.handleChangeCity.bind(this);
+        this.handleChangeCuisine = this.handleChangeCuisine.bind(this);
         this.onChangeSearchCuisine = this.onChangeSearchCuisine.bind(this);
         this.retrieveCuisines = this.retrieveCuisines.bind(this);
         this.searchCuisine = this.searchCuisine.bind(this);
@@ -60,7 +61,7 @@ export default class Homepage extends Component {
     }
 
     searchCity(event) {
-        RestaurantDataService.findByCity(this.state.selectedOption)
+        RestaurantDataService.findByCity(this.state.selectedOptionCity)
             .then(response => {
                 this.setState({
                     restaurants: response.data,
@@ -79,7 +80,7 @@ export default class Homepage extends Component {
         .then(response => {
             this.setState({
                 cities: response.data,
-                selectedOption: response.data[0].city,
+                selectedOptionCity: response.data[0].city,
             });
         })
         .catch(e => {
@@ -87,9 +88,15 @@ export default class Homepage extends Component {
         });
     }
 
-    handleChange = (event) => {
-        this.setState({ selectedOption: event.target.value }, () =>
-            console.log('Option selected: ', event)
+    handleChangeCity = (event) => {
+        this.setState({ selectedOptionCity: event.target.value }, () =>
+            console.log('Option selected City: ', event)
+        )
+    }
+
+    handleChangeCuisine = (event) => {
+        this.setState({ selectedOptionCuisine: event.target.value }, () =>
+            console.log('Option selected Cuisine: ', event)
         )
     }
 
@@ -98,7 +105,8 @@ export default class Homepage extends Component {
 
             .then(response => {
                 this.setState({
-                    cuisines: response.data
+                    cuisines: response.data,
+                    selectedOptionCuisine: response.data[0].id,
                 });
                 console.log("cuisines ", response.data);
             })
@@ -114,8 +122,8 @@ export default class Homepage extends Component {
         });
     }
     searchCuisine(event) {
-        this.state.selectedOption = parseInt(this.state.selectedOption) + 1
-        RestaurantDataService.getRestaurants(this.state.selectedOption)
+        const index = parseInt(this.state.selectedOptionCuisine) + 1
+        RestaurantDataService.getRestaurants(index)
             .then(response => {
                 this.setState({
                     restaurants: response.data,
@@ -158,8 +166,8 @@ export default class Homepage extends Component {
                         <div className="container">
                             <form onSubmit={this.searchCity}>
                                 <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                                    value={this.state.selectedOption}
-                                    onChange={this.handleChange}>
+                                    value={this.state.selectedOptionCity}
+                                    onChange={this.handleChangeCity}>
                                     {this.state.cities.map((city, index) => (
                                         <option key={index} value={city.city}>{city.city}</option>
                                     ))}
@@ -174,8 +182,8 @@ export default class Homepage extends Component {
                         <div className="container">
                             <form onSubmit={this.searchCuisine}>
                                 <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                                    value={this.state.selectedOption}
-                                    onChange={this.handleChange}>
+                                    value={this.state.selectedOptionCuisine}
+                                    onChange={this.handleChangeCuisine}>
                                     {this.state.cuisines.map((cuisine, index) => (
                                         <option key={index} value={index}>{cuisine.type}</option>
                                     ))}

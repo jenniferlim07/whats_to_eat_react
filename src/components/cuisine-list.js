@@ -48,10 +48,11 @@ export default class CuisineList extends Component {
         RestaurantDataService.getAllCuisines()
             .then(response => {
                 this.setState({
-                    cuisines: response.data
+                    cuisines: response.data,
+                    selectedOption: response.data[0].id,
                 });
                 console.log("retrieveCuisines ", response.data);
-                console.log(this.state.cuisines)
+                // console.log(this.state.cuisines)
             })
             .catch(e => {
                 console.log(e);
