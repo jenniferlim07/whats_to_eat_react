@@ -1,29 +1,9 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import '../index.css';
 
-
-const useStyles = makeStyles((theme) => ({
-	paper: {
-		marginTop: theme.spacing(8),
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-	},
-	avatar: {
-		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
-	},
-	form: {
-		width: '100%', // Fix IE 11 issue.
-		marginTop: theme.spacing(1),
-	},
-	submit: {
-		margin: theme.spacing(3, 0, 2),
-	},
-}));
 
 export default class Homepage extends Component {
     constructor(props) {
@@ -52,7 +32,6 @@ export default class Homepage extends Component {
     }
 
     componentDidMount() {
-        // this.retrieveRestaurants();
         this.retrieveCities();
         this.retrieveCuisines();
     }
@@ -67,8 +46,6 @@ export default class Homepage extends Component {
     }
 
     retrieveRestaurants() {
-        console.log("*&*&*&*&* ", this.state.user)
-        // const random_num = Math.floor(Math.floor()* response.data.lenth)
         RestaurantDataService.getAll()
             .then(response => {
                 this.setState({
@@ -76,7 +53,6 @@ export default class Homepage extends Component {
                     random_restaurant: response.data[Math.floor(Math.random() * response.data.length)]
                 });
                 console.log(response.data)
-                console.log("random restaurant ", response.data[Math.floor(Math.random() * response.data.length)])
             })
             .catch(e => {
                 console.log(e);
@@ -84,12 +60,10 @@ export default class Homepage extends Component {
     }
 
     searchCity(event) {
-        // debugger;
         RestaurantDataService.findByCity(this.state.selectedOption)
             .then(response => {
                 this.setState({
                     restaurants: response.data,
-                    // currentRestaurant: null,
                     random_restaurant: response.data[Math.floor(Math.random() * response.data.length)]
                 });
                 console.log("search city", response.data)
@@ -114,7 +88,6 @@ export default class Homepage extends Component {
     }
 
     handleChange = (event) => {
-        // debugger;
         this.setState({ selectedOption: event.target.value }, () =>
             console.log('Option selected: ', event)
         )
@@ -141,8 +114,6 @@ export default class Homepage extends Component {
         });
     }
     searchCuisine(event) {
-
-        console.log("***** ", this.state.selectedOption)
         this.state.selectedOption = parseInt(this.state.selectedOption) + 1
         RestaurantDataService.getRestaurants(this.state.selectedOption)
             .then(response => {
@@ -150,7 +121,7 @@ export default class Homepage extends Component {
                     restaurants: response.data,
                     random_restaurant: response.data[Math.floor(Math.random() * response.data.length)]
                 });
-                console.log("cuisine restaurant data ", response.data)
+                console.log(response.data)
             })
             .catch(e => {
                 console.log(e);
@@ -158,14 +129,10 @@ export default class Homepage extends Component {
         event.preventDefault();
     }
 
-    // const classes = useStyles();
-
-
     render() {
         return (
             <div className="app">
-                <div className="hm-card">
-            
+                <div className="hm-card">        
                     <h1 className="heading">
                         <a target='_blank' href={this.state.random_restaurant.website}>
                             {this.state.random_restaurant.name}
@@ -186,13 +153,13 @@ export default class Homepage extends Component {
                         </Button>
                         <br />
                         <br />
+
                         <h5>Surprise by Location</h5>
                         <div className="container">
                             <form onSubmit={this.searchCity}>
                                 <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
                                     value={this.state.selectedOption}
                                     onChange={this.handleChange}>
-                                    {/* {citiesList} */}
                                     {this.state.cities.map((city, index) => (
                                         <option key={index} value={city.city}>{city.city}</option>
                                     ))}
@@ -202,7 +169,6 @@ export default class Homepage extends Component {
                                 </button>
                             </form>
                         </div>
-
 
                         <h5>Surprise by Cuisine</h5>
                         <div className="container">
@@ -219,23 +185,6 @@ export default class Homepage extends Component {
                                 </button>
                             </form>
                         </div>
-{/* 
-                        <div className="container">
-                            <form onSubmit={this.searchCity}>
-                                <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                                    value={this.state.selectedOption}
-                                    onChange={this.handleChange}>
-                                    {this.state.cuisines.map((cuisine, index) => (
-                                        <option key={index} value={cuisine.type}>{cuisine.type}</option>
-                                    ))}
-                                </select>
-                                <button className="submitBtn" type="submit" value="Submit">
-                                    Submit
-                                </button>
-                            </form>
-                        </div> */}
-
-
                     </div>                         
                 </div>
             </div>

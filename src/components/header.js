@@ -6,12 +6,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import images from '../images/my_logo.jpg';
+import Navigation from './navigation';
 
 const useStyles = makeStyles((theme) => ({
 	appBar: {
 		borderBottom: `1px solid ${theme.palette.divider}`,
+		// alignItems: 'center',
 	},
 	link: {
 		margin: theme.spacing(1, 1.5),
@@ -30,60 +32,24 @@ function Header() {
 				position="static"
 				color="default"
 				elevation={0}
-				className={classes.appBar}
-			>
+				className={classes.appBar}>
 				<Toolbar className={classes.toolbar}>
 					<Typography
 						variant="h6"
 						color="inherit"
 						noWrap
-						className={classes.toolbarTitle}
-
-					>
-
+						className={classes.toolbarTitle}>
 						<Link
 							component={NavLink}
 							to="/whats_to_eat_react"
 							underline="none"
 							color="textPrimary"
-							className="nav-link h5 link-secondary"
-						>
+							className="nav-link h5 link-secondary">
 							<img src={images} alt="Logo" />
-							{/* WhatsToEat */}
-						</Link>
-						
+						</Link>		
 					</Typography>
-					{/* <nav>
-						<Link
-							color="textPrimary"
-							href="#"
-							className={classes.link}
-							component={NavLink}
-							to="/register"
-						>
-							Register
-						</Link>
-					</nav>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
-						component={NavLink}
-						to="/login"
-					>
-						Login
-					</Button>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
-						component={NavLink}
-						to="/logout"
-					>
-						Logout
-					</Button> */}
+
+					<Navigation />
 				</Toolbar>
 			</AppBar>
 		</React.Fragment>

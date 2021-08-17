@@ -74,75 +74,73 @@ export default function SignUp() {
 	return (
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
-			<div className={classes.paper}>
-				<Avatar className={classes.avatar}></Avatar>
-				<Typography component="h1" variant="h5">
-					Sign up
-				</Typography>
-				<form className={classes.form} noValidate>
-					<Grid container spacing={2}>
-						<Grid item xs={12}>
-							<TextField
-								variant="outlined"
-								required
+			<div className="app">
+				<div className="card-login">
+					<div className={classes.paper}>
+						<Avatar className={classes.avatar}></Avatar>
+						<Typography component="h1" variant="h5">
+							Sign up
+						</Typography>
+						<form className={classes.form} noValidate>
+							<Grid container spacing={2}>
+								<Grid item xs={12}>
+									<TextField
+										variant="outlined"
+										required
+										fullWidth
+										id="email"
+										label="Email Address"
+										name="email"
+										autoComplete="email"
+										onChange={handleChange}
+									/>
+								</Grid>
+								<Grid item xs={12}>
+									<TextField
+										variant="outlined"
+										required
+										fullWidth
+										id="user_name"
+										label="Username"
+										name="user_name"
+										autoComplete="user_name"
+										onChange={handleChange}
+									/>
+								</Grid>
+								<Grid item xs={12}>
+									<TextField
+										variant="outlined"
+										required
+										fullWidth
+										name="password"
+										label="Password"
+										type="password"
+										id="password"
+										autoComplete="current-password"
+										onChange={handleChange}
+									/>
+								</Grid>
+							</Grid>
+							<Button
+								type="submit"
 								fullWidth
-								id="email"
-								label="Email Address"
-								name="email"
-								autoComplete="email"
-								onChange={handleChange}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant="outlined"
-								required
-								fullWidth
-								id="user_name"
-								label="Username"
-								name="user_name"
-								autoComplete="user_name"
-								onChange={handleChange}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant="outlined"
-								required
-								fullWidth
-								name="password"
-								label="Password"
-								type="password"
-								id="password"
-								autoComplete="current-password"
-								onChange={handleChange}
-							/>
-						</Grid>
-						{/* <Grid item xs={12}>
-							<FormControlLabel
-								control={<Checkbox value="allowExtraEmails" color="primary" />}
-								label="I want to receive inspiration, marketing promotions and updates via email."
-							/>
-						</Grid> */}
-					</Grid>
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={classes.submit}
-						onClick={handleSubmit}
-					>
-						Sign Up
-					</Button>
-					<Grid container justify="flex-end">
-						<Grid item>
-							<Link href="#" variant="body2" to="/login">
-								Already have an account? Sign in
-							</Link>
-						</Grid>
-					</Grid>
-				</form>
+								variant="contained"
+								color="primary"
+								className={classes.submit}
+								onClick={handleSubmit}
+							>
+								Sign Up
+							</Button>
+							<Grid container justify="flex-end">
+								<Grid item>
+									<Link href="#" variant="body2" to="/login">
+										Already have an account? Sign in
+									</Link>
+								</Grid>
+							</Grid>
+						</form>
+					</div>
+				</div>
 			</div>
 		</Container>
 	);

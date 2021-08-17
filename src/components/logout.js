@@ -6,7 +6,6 @@ export default function SignUp() {
 	const history = useHistory();
 
 	useEffect(() => {
-		// const response = 
 		axiosInstance.post('/api/user/logout/blacklist/', {
 			refresh_token: localStorage.getItem('refresh_token'),
 		});

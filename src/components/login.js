@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import axiosInstance from '../axios';
 import { useHistory, Link } from 'react-router-dom';
+
 //MaterialUI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-// import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import images from '../images/indulge-restaurant.jpg';
+
 import '../App.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,12 +42,6 @@ export default function SignIn() {
 
 	const [formData, updateFormData] = useState(initialFormData);
 
-	// function getCurrentUser(id) {
-	// 	const user = id;
-	// 	console.log("*** USER ", user);
-	// 	return user;
-	// }
-
 	const handleChange = (e) => {
 		updateFormData({
 			...formData,
@@ -77,32 +68,17 @@ export default function SignIn() {
 
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
-				history.push('/');
-				// console.log(res);
+				history.push('/whats_to_eat_react');
 				console.log(res.data);
-				// console.log(res.data.id)
-				// getCurrentUser(res.data.id)
 			});
 	};
 
-	// const getCurrentUser = () => {
-	// 	return JSON.parse(localStorage.getItem("user"));
-	// }
-
 	const classes = useStyles();
 
-	// if (localStorage.getItem('access_token')) {
-	// 	history.push('/homepage')
-	// }
-
 	return (
-		// <Container component="main" maxWidth="xs">
 		<Container>
-			{/* <CssBaseline /> */}
 			<div className="app">
 				<div className="card-login">
-
-			{/* <div className={classes.paper}> */}
 				<Avatar className={classes.avatar}></Avatar>
 				<Typography component="h1" variant="h5">
 					Sign in
@@ -132,10 +108,6 @@ export default function SignIn() {
 						autoComplete="current-password"
 						onChange={handleChange}
 					/>
-					{/* <FormControlLabel
-						control={<Checkbox value="remember" color="primary" />}
-						label="Remember me"
-					/> */}
 					<Button
 						type="submit"
 						fullWidth
@@ -159,15 +131,8 @@ export default function SignIn() {
 						</Grid>
 					</Grid>
 				</form>
-			{/* </div> */}
+				</div>
 			</div>
-			</div>
-			{/* <div className="landing-wrapper"
-			style={{ backgroundImage: `url(${images})`}}>
-			</div>         */}
-			{/* <img src={images} alt="Logo" /> */}
-			{/* <div className="bg"></div> */}
-
 		</Container>
 	);
 }

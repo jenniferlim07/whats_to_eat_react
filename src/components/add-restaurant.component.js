@@ -65,12 +65,6 @@ export default class AddRestaurant extends Component {
             address: this.state.address,
             city: this.state.city
         };
-        // this.autoComplete = new mapApi.places.Autocomplete(
-        //     this.state.address,
-        // );
-
-        // const auto = this.autoComplete.getPlace()
-        console.log("@@@@@@ ", this.state.user)
 
         RestaurantDataService.create(data)
             .then(response => {
@@ -161,8 +155,8 @@ export default class AddRestaurant extends Component {
                                 name="city"
                             />
                         </div>
-{/* 
-                        <div className="form-group">
+
+                        {/* <div className="form-group">
                             <label htmlFor="city">Zip Code</label>
                             <input 
                                 type="text"
@@ -185,7 +179,6 @@ export default class AddRestaurant extends Component {
                     </div>
                 </Switch>
             </div>
-
         );
     }
 }

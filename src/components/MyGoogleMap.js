@@ -10,14 +10,11 @@ import Marker from './Marker';
 import { Descriptions } from 'antd';
 import RestaurantDataService from "../services/restaurant.service";
 
-// import AddCuisine from "./add-cuisine";
-
 const API_KEY = process.env.REACT_APP_API_KEY
 const Wrapper = styled.main`
     width: 100%;
     height: 100%;
 `;
-
 
 
 class MyGoogleMap extends Component {
@@ -268,14 +265,8 @@ class MyGoogleMap extends Component {
 
                 </GoogleMapReact>
 
-                {/* <div className="info-wrapper">
-                    <div className="map-details">Restaurant: <span>{this.state.restaurant_name}</span></div>
-                    <div className="map-details">Address: <span>{this.state.address}</span></div>
-                </div> */}
                 <div className="descriptions">
                     <Descriptions bordered>
-                        {/* <Descriptions.Item label="City">{this.state.city}</Descriptions.Item> */}
-                        {/* <Descriptions.Item label="State">{this.state.state}</Descriptions.Item> */}
                         <Descriptions.Item label="Restaurant">{this.state.restaurant_name}</Descriptions.Item>
                         <br />
                         <Descriptions.Item label="Address">{this.state.address}</Descriptions.Item>
@@ -296,7 +287,6 @@ class MyGoogleMap extends Component {
                         </button>
                         </div>
                     )}
-
 
                 </div>
             </Wrapper >

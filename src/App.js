@@ -1,18 +1,14 @@
 import './App.css';
-import React, { Component, useState, useEffect } from "react";
-import { Route, Switch, Link, NavLink, Nav, Redirect } from "react-router-dom";
+import React, { Component } from "react";
+import { Route, Switch, NavLink} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import images from './images/my_logo.jpg';
 
 import RestaurantList from "./components/restaurant-list.component";
-// import AddRestaurant from "./components/add-restaurant.component";
 import Restaurant from "./components/restaurant.component";
-// import Maps from "./components/maps.component";
 import MyGoogleMap from './components/MyGoogleMap';
-// import AddCuisine from "./components/add-cuisine";
 
 import Header from "./components/header";
-import Footer from "./components/footer";
+// import Footer from "./components/footer";
 import Register from "./components/register";
 import Login from "./components/login";
 import Logout from "./components/logout";
@@ -20,7 +16,7 @@ import Homepage from "./components/homepage"
 import CuisineList from './components/cuisine-list';
 import Cuisine from './components/cuisine';
 import AddCuisine from './components/add-cuisine';
-import Navigation from './components/navigation';
+// import Navigation from './components/navigation';
 
 class App extends Component {
 
@@ -28,10 +24,8 @@ class App extends Component {
     return (
       <div>
         <Header />
-
-      {/* id="sidebar" className="col-sm-3 col-md-3 col-lg-2 d-md-block sidebar text-start" */}
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <ul className="nav flex-row" id="navigation">
+            <ul className="nav justify-content-center" id="navigation">
               <li className="nav-item">
                 <NavLink  className="nav-link h5 link-secondary" to={"api/restaurants/"}>
                   <span className="ml-2">Restaurants</span>
@@ -53,23 +47,11 @@ class App extends Component {
                 </NavLink>
               </li>
             </ul>
-
-            <Navigation />
+            {/* <Navigation /> */}
           </nav>
 
         <div>
           <Switch>
-            {/* <Route
-                exact
-                path="/"
-                render={() => {
-                    return (
-                      localStorage.getItem('access_token') ?
-                      <Redirect to="/home" /> :
-                      <Redirect to="/login" /> 
-                    )
-                }}
-              /> */}
             <Route path="/register" component={Register} />
             <Route path="/login/" component={Login} />
             <Route path="/logout" component={Logout} />
@@ -83,10 +65,7 @@ class App extends Component {
             <div className="main-wrapper">
               <Route exact path="/add" component={MyGoogleMap} />
             </div>
-
-
           </Switch>
-          {/* <Footer /> */}
         </div>
       </div>
 

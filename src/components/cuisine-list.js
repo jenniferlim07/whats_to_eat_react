@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
-import { Link } from "react-router-dom";
-import AddCuisine from "./add-cuisine";
+// import { Link } from "react-router-dom";
+// import AddCuisine from "./add-cuisine";
 import '../index.css';
 
 
@@ -22,12 +22,8 @@ export default class CuisineList extends Component {
         this.state = {
             user: localStorage.getItem('id'),
             cuisines: [],
-            // currentCuisine: null,
-            // currentIndex: -1,
             currentRestaurant: null,
             currentResIndex: -1,
-            // currentCuisine: null,
-            // currentIndex: -1,
             searchCuisine: "",
             restaurants: [],
             // selectedOption: '',
@@ -71,26 +67,14 @@ export default class CuisineList extends Component {
     //     // console.log("*** ", this.state.currentIndex)
     // }
 
-    // setActiveCuisine(cuisine, index) {
-    //     this.setState({
-    //         currentCuisine: cuisine,
-    //         currentIndex: index
-    //     })
-    //     // console.log("*** ", this.state.currentIndex)
-    //     this.getCuisineRestaurants(this.state.currentIndex);
-    // }
     setActiveRestaurant(restaurant, index) {
         this.setState({
             currentRestaurant: restaurant,
             currentResIndex: index
         })
-        // console.log("*** ", this.state.currentIndex)
-        // this.getCuisineRestaurants(this.state.currentIndex);
     }
 
     searchCuisine(event) {
-
-        console.log("***** ", this.state.selectedOption)
         const index = parseInt(this.state.selectedOption) + 1
         RestaurantDataService.getRestaurants(index)
             .then(response => {
@@ -106,7 +90,6 @@ export default class CuisineList extends Component {
     }
 
     handleChange = (event) => {
-        // debugger;
         this.setState({ selectedOption: event.target.value}, () =>
             console.log('Option selected: ', event.target.value)
         )
@@ -129,123 +112,76 @@ export default class CuisineList extends Component {
 
         return (
             <div className="bg">
-            <div className="card">
-            {/* <div className='rowC'>
-            <div className="list row"> */}
-                <div className="col-md-8">
-                    {/* <div className="input-group mb-3"> */}
+                <div className="card">
+                    <div className="col-md-8">
                         <h5>Restaurants by Cuisine</h5>
                         <div className="container">
+                            <form onSubmit={this.searchCuisine}>
+                                <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    value={this.state.selectedOption}
+                                    onChange={this.handleChange}>
+                                    {this.state.cuisines.map((cuisine, index) => (
+                                        <option key={index} value={index}>{cuisine.type}</option>
+                                    ))}
+                                </select>                                
+                                {/* <input type="submit" value="Submit" /> */}
+                                <button className="submitBtn" type="submit" value="Submit">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+                    </div>
 
-                                <form onSubmit={this.searchCuisine}>
-                                    <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
-                                    // <select className="mdb-select md-form colorful-select dropdown-primary"
-                                        value={this.state.selectedOption}
-                                        onChange={this.handleChange}>
-                                        {/* {citiesList} */}
-                                        {/* <option selected value="" disable selected>Choose a city</option> */}
-                                        {this.state.cuisines.map((cuisine, index) => (
-                                            
-                                            <option key={index} value={index}>{cuisine.type}</option>
-                                        ))}
-                                    </select>
+                    <div className="col-md-8">
+                        <h4>Restaurant List</h4>
+                        <ul className="list-group">
+                            {this.state.restaurants &&
+                                restaurants.map((restaurant, index) => (
+                                    <li
+                                        className={
+                                            "list-group-item " +
+                                            (index === currentResIndex ? "active" : "")
+                                        }
+                                        onClick={() => this.setActiveRestaurant(restaurant, index)}
+                                        key={index}>
+                                        {restaurant.name}
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+
+                    <div className="col-md-6">
+                        {currentRestaurant ? (
+                            <div>
+                                <h4>Restaurant</h4>
+                                <div>
+                                    <label>
+                                        <strong>Name:</strong>
+                                    </label>{" "}
+                                    {currentRestaurant.name}
+                                </div>
+                                <div>
+                                    <label>
+                                        <strong>Website:</strong>
+                                    </label>{" "}
+                                    <a target='_blank' href={currentRestaurant.website}>{currentRestaurant.website}</a>
                                     
-                                    {/* <input type="submit" value="Submit" /> */}
-                                    <button className="submitBtn" type="submit" value="Submit">
-                                        Submit
-                                    </button>
-                                </form>
-                        </div>
+                                </div>
+                                <div>
+                                    <label>
+                                        <strong>Address:</strong>
+                                    </label>{" "}
+                                    {currentRestaurant.address}
+                                </div>
+                            </div>
+                        ) : (
+                            <div>
+                                <br />
+                                <p>Please click on a Category...</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
-
-
-                <div className="col-md-8">
-                    <h4>Restaurant List</h4>
-
-                    <ul className="list-group">
-                        {this.state.restaurants &&
-                            restaurants.map((restaurant, index) => (
-                                <li
-                                    className={
-                                        "list-group-item " +
-                                        (index === currentResIndex ? "active" : "")
-                                    }
-                                    onClick={() => this.setActiveRestaurant(restaurant, index)}
-                                    key={index}>
-                                    {restaurant.name}
-                                </li>
-                            ))}
-                    </ul>
-
-                </div>
-
-                {/* <div className="col-md-8">
-                    <h4>Cuisine List</h4>
-
-                    <ul className="list-group">
-                        {this.state.cuisines &&
-                            cuisines.map((cuisine, index) => (
-                                <li
-                                    className={
-                                        "list-group-item " +
-                                        (index === currentIndex ? "active" : "")
-                                    }
-                                    onClick={() => this.setActiveCuisine(cuisine, index)}
-                                    key={index}>
-                                    {cuisine.type}
-                                </li>
-                            ))}
-                    </ul>
-
-                </div> */}
-
-                <div className="col-md-6">
-                    {currentRestaurant ? (
-                        <div>
-                            <h4>Restaurant</h4>
-                            <div>
-                                <label>
-                                    <strong>Name:</strong>
-                                </label>{" "}
-                                {currentRestaurant.name}
-                            </div>
-                            <div>
-                                <label>
-                                    <strong>Website:</strong>
-                                </label>{" "}
-                                <a target='_blank' href={currentRestaurant.website}>{currentRestaurant.website}</a>
-                                
-                            </div>
-                            <div>
-                                <label>
-                                    <strong>Address:</strong>
-                                </label>{" "}
-                                {currentRestaurant.address}
-                            </div>
-
-                            {/* <Link
-                                to={"api/cuisine/" + currentCuisine.id}
-                                className="btn btn-outline-primary btn-sm">
-                                Edit
-                            </Link> */}
-                            {/* <Link
-                                to={"/cuisines/" + currentRestaurant.id}
-                                className="btn btn-outline-primary btn-sm">
-                                Edit
-                            </Link> */}
-                        </div>
-                    ) : (
-                        <div>
-                            <br />
-                            <p>Please click on a Category...</p>
-                        </div>
-                    )}
-                {/* </div>
-                
-            </div> */}
-            {/* <AddCuisine /> */}
-            </div>
-            </div>
             </div>
         );
     }

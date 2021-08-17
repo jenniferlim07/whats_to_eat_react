@@ -11,16 +11,13 @@ export default class Cuisine extends Component {
         this.deleteCuisine = this.deleteCuisine.bind(this);
         this.retrieveCuisines = this.retrieveCuisines.bind(this);
         this.setCuisine = this.setCuisine.bind(this);
-        // this.getCuisineRestaurants = this.getCuisineRestaurants.bind(this)
         // this.handleChange = this.handleChange.bind(this);
 
         this.state = {
             currentCuisine: {
                 id: null,
-                type: "",
-                
+                type: "",                
             },
-            // cuisines: [],
             restaurants: [],
             message: ""
         };
@@ -49,47 +46,12 @@ export default class Cuisine extends Component {
                     currentCuisine: response.data,
                     
                 });
-                // console.log("get restaurant ", response.data)
                 console.log(this.state.restaurants)
-                // console.log(this.state.currentRestaurant.cuisine)
             })
             .catch(e => {
                 console.log(e);
             });
-        // this.getCuisineRestaurants(id);
     }
-
-    // getCuisineRestaurants(id) {
-    //     RestaurantDataService.getRestaurants(id)
-    //         .then(response => {
-    //             this.setState({
-    //                 restaurants: response.data
-    //             });
-    //             console.log("get restaurant ", response.data)
-    //             console.log(this.state.restaurants)
-    //             // console.log(this.state.currentRestaurant.cuisine)
-    //         })
-    //         .catch(e => {
-    //             console.log(e);
-    //         });
-    // }
-
-    // updateRestaurant() {
-
-    //     RestaurantDataService.update(
-    //         this.state.currentRestaurant.id, 
-    //         this.state.currentRestaurant
-    //     )
-    //         .then(response => {
-    //             console.log(response.data);
-    //             this.setState({
-    //                 message: "The restaurant was update successfully!"
-    //             });
-    //         })
-    //         .catch(e => {
-    //             console.log(e);
-    //         });
-    // }
 
     deleteCuisine() {
         RestaurantDataService.deleteCuisine(this.state.currentCuisine.id)
@@ -104,7 +66,6 @@ export default class Cuisine extends Component {
 
     retrieveCuisines() {
         RestaurantDataService.getAllCuisines()
-
             .then(response => {
                 this.setState({
                     cuisines: response.data
@@ -124,84 +85,43 @@ export default class Cuisine extends Component {
         })
     }
 
-    // handleChange(event) {
-    //     const data = {
-    //         id: this.state.currentCuisine.id,
-    //         type: this.state.currentRestaurant.type,
-    //         restaurants: this.state.currentRestaurant.restaurants,
-
-    //         cuisine: event.target.value
-    //     };
-    //     // console.log(event.target.getAttribute("data-id").value)
-    //     console.log("event target ", event.target.value)
-
-    //     this.setState({
-    //         currentRestaurant: data
-    //     })
-    //     // console.log("category", category)
-
-    //     event.preventDefault();
-    // }
-
     render() {
         const { currentCuisine } = this.state
 
         return (
             <div className="ad">
-            <div className="card">
-                {currentCuisine ? (
-                    <div className="edit-form">
-                        <h4>Cuisine</h4>
-                        <form>
-                            <div className="form-group">
-                                <label htmlFor="name">Type</label>
-                                <input 
-                                    type="text"
-                                    className="form-control"
-                                    id="name"
-                                    value={currentCuisine.type}
-                                    onChange={this.onChangeType}
-                                />
-                            </div>
+                <div className="card">
+                    {currentCuisine ? (
+                        <div className="edit-form">
+                            <h4>Cuisine</h4>
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="name">Type</label>
+                                    <input 
+                                        type="text"
+                                        className="form-control"
+                                        id="name"
+                                        value={currentCuisine.type}
+                                        onChange={this.onChangeType}
+                                    />
+                                </div>
+                            </form>
 
-
-                            {/* <div className="form-group">
-                                <label htmlFor="city">City</label>
-                                <input 
-                                    type="text"
-                                    className="form-control"
-                                    id="city"
-                                    value={currentRestaurant.city}
-                                    onChange={this.onChangeCity}
-                                    name="city"
-                                />
-                            </div> */}
-                        </form>
-                        {/* <ul>
-                            <label>
-                                <strong>Cuisines:</strong>
-                            </label>
-                            {this.state.restaurants.map((restaurant) => {
-                                return <li key={restaurant.id}>{restaurant.name}</li>
-                            })}
-                        </ul> */}
-
-
-                        <button
-                            type="submit"
-                            className="btn btn-outline-primary btn-sm"
-                            onClick={this.deleteCuisine}>
-                            Delete
-                        </button>
-                        <p>{this.state.message}</p>
-                    </div>
-                ) : (
-                    <div>
-                        <br />
-                        <p>Click on a Restaurant</p>
-                    </div>
-                )}
-            </div>
+                            <button
+                                type="submit"
+                                className="btn btn-outline-primary btn-sm"
+                                onClick={this.deleteCuisine}>
+                                Delete
+                            </button>
+                            <p>{this.state.message}</p>
+                        </div>
+                    ) : (
+                        <div>
+                            <br />
+                            <p>Click on a Restaurant</p>
+                        </div>
+                    )}
+                </div>
             </div>
         );
     }
