@@ -31,7 +31,7 @@ class App extends Component {
 
       {/* id="sidebar" className="col-sm-3 col-md-3 col-lg-2 d-md-block sidebar text-start" */}
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <ul className="nav flex-row">
+            <ul className="nav flex-row" id="navigation">
               <li className="nav-item">
                 <NavLink  className="nav-link h5 link-secondary" to={"/restaurants"}>
                   <span className="ml-2">Restaurants</span>
@@ -73,8 +73,12 @@ class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/login/" component={Login} />
             <Route path="/logout" component={Logout} />
-            <Route path="/whats_to_eat_react" component={Homepage} />
-            <Route path="/restaurants" component={RestaurantList} />
+            <Route path="/whats_to_eat_react">
+              <Homepage />
+              </Route>
+            <Route path="/restaurants">
+              <RestaurantList />
+            </Route>
             <Route path="/restaurants/:id" component={Restaurant} />
             <Route path="/cuisine" component={CuisineList} />
             <Route path="/cuisines/:id" component={Cuisine} />
