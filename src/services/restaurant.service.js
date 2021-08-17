@@ -4,7 +4,7 @@ import axiosInstance from '../axios';
 class RestaurantDataService {
     getAll() {
         // return http.get("/restaurants");
-        return axiosInstance.get("/restaurants")
+        return axiosInstance.get("/api/restaurant/")
     }
 
     get(id) {

@@ -30,7 +30,7 @@ export default class CuisineList extends Component {
             // currentIndex: -1,
             searchCuisine: "",
             restaurants: [],
-            selectedOption: '',
+            // selectedOption: '',
         };
     }
 
@@ -144,7 +144,7 @@ export default class CuisineList extends Component {
                                         onChange={this.handleChange}>
                                         {/* {citiesList} */}
                                         {/* <option selected value="" disable selected>Choose a city</option> */}
-                                        {cuisines.map((cuisine, index) => (
+                                        {this.state.cuisines.map((cuisine, index) => (
                                             
                                             <option key={index} value={index}>{cuisine.type}</option>
                                         ))}

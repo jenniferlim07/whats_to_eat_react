@@ -33,7 +33,7 @@ class App extends Component {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="nav flex-row" id="navigation">
               <li className="nav-item">
-                <NavLink  className="nav-link h5 link-secondary" to={"/restaurants"}>
+                <NavLink  className="nav-link h5 link-secondary" to={"api/restaurants/"}>
                   <span className="ml-2">Restaurants</span>
                 </NavLink>
               </li>
@@ -73,10 +73,8 @@ class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/login/" component={Login} />
             <Route path="/logout" component={Logout} />
-
-            <Route path="/restaurants">
-              <RestaurantList/>
-            </Route>
+            <Route path="/whats_to_eat_react" component={Homepage} />
+            <Route path="/api/restaurants/" component={RestaurantList} />
             <Route path="/restaurants/:id" component={Restaurant} />
             <Route path="/cuisine" component={CuisineList} />
             <Route path="/cuisines/:id" component={Cuisine} />
@@ -86,9 +84,7 @@ class App extends Component {
               <Route exact path="/add" component={MyGoogleMap} />
             </div>
 
-            <Route path="/whats_to_eat_react">
-              <Homepage />
-            </Route>
+
           </Switch>
           {/* <Footer /> */}
         </div>
