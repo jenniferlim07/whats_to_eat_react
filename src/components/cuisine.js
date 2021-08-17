@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
+import '../index.css';
 
 export default class Cuisine extends Component {
     constructor(props) {
@@ -146,7 +147,8 @@ export default class Cuisine extends Component {
         const { currentCuisine } = this.state
 
         return (
-            <div>
+            <div className="app">
+            <div className="card">
                 {currentCuisine ? (
                     <div className="edit-form">
                         <h4>Cuisine</h4>
@@ -187,7 +189,7 @@ export default class Cuisine extends Component {
 
                         <button
                             type="submit"
-                            className="btn btn-outline-dark btn-sm"
+                            className="btn btn-outline-primary btn-sm"
                             onClick={this.deleteCuisine}>
                             Delete
                         </button>
@@ -199,6 +201,7 @@ export default class Cuisine extends Component {
                         <p>Click on a Restaurant</p>
                     </div>
                 )}
+            </div>
             </div>
         );
     }
