@@ -71,6 +71,7 @@ body, html {
     background: whitesmoke;
     width: 40%;
     /* height: 60%; */
+    /* width: auto; */
     height: auto;
     display: flex;
     align-items: center;

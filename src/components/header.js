@@ -9,6 +9,7 @@ import Link from '@material-ui/core/Link';
 // import Button from '@material-ui/core/Button';
 import images from '../images/my_logo.jpg';
 import Navigation from './navigation';
+import Homepage from './homepage';
 
 const useStyles = makeStyles((theme) => ({
 	appBar: {
@@ -41,7 +42,7 @@ function Header() {
 						className={classes.toolbarTitle}>
 						<Link
 							component={NavLink}
-							to="/whats_to_eat_react"
+							to="/"
 							underline="none"
 							color="textPrimary"
 							className="nav-link h5 link-secondary">

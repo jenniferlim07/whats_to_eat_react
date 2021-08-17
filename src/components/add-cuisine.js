@@ -77,6 +77,7 @@ export default class AddCuisine extends Component {
             .catch(e => {
                 console.log(e);
             });
+        this.refreshList();
     }
 
     newCuisine() {
@@ -146,47 +147,47 @@ export default class AddCuisine extends Component {
                                 </button>
                             </div>
                         )}
-                        <div className="col-md-8">
-                            <h4>Cuisine List</h4>
+                    </div>
+                    <div className="col-md-6">
+                        <h4>Cuisine List</h4>
 
-                            <ul className="list-group">
-                                {this.state.cuisines &&
-                                    cuisines.map((cuisine, index) => (
-                                        <li
-                                            className={
-                                                "list-group-item " +
-                                                (index === currentIndex ? "active" : "")
-                                            }
-                                            onClick={() => this.setActiveCuisine(cuisine, index)}
-                                            key={index}>
-                                            {cuisine.type}
-                                        </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className="col-md-6">
-                            {currentCuisine ? (
+                        <ul className="list-group">
+                            {this.state.cuisines &&
+                                cuisines.map((cuisine, index) => (
+                                    <li
+                                        className={
+                                            "list-group-item " +
+                                            (index === currentIndex ? "active" : "")
+                                        }
+                                        onClick={() => this.setActiveCuisine(cuisine, index)}
+                                        key={index}>
+                                        {cuisine.type}
+                                    </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="col-md-8">
+                        {currentCuisine ? (
+                            <div>
+                                <h4>Cuisine</h4>
                                 <div>
-                                    <h4>Cuisine</h4>
-                                    <div>
-                                        <label>
-                                            <strong>Type:</strong>
-                                        </label>{" "}
-                                        {currentCuisine.type}
-                                        <Link
-                                            to={"/cuisines/" + currentCuisine.id}
-                                            className="btn btn-outline-primary btn-sm">
-                                            Edit
-                                        </Link>
-                                    </div>
+                                    <label>
+                                        <strong>Type:</strong>
+                                    </label>{" "}
+                                    {currentCuisine.type}
                                 </div>
-                            ) : (
-                                <div>
-                                    <br />
-                                    <p>Please click on a Category...</p>
-                                </div>
-                            )}
-                        </div>
+                                <Link
+                                    to={"/cuisines/" + currentCuisine.id}
+                                    className="btn btn-outline-primary btn-sm">
+                                    Edit
+                                </Link>
+                            </div>
+                        ) : (
+                            <div>
+                                <br />
+                                <p>Please click on a Category...</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

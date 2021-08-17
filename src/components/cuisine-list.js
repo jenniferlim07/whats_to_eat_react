@@ -9,15 +9,12 @@ export default class CuisineList extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearchCuisine = this.onChangeSearchCuisine.bind(this);
+        this.retrieveRestaurants = this.retrieveRestaurants.bind(this);
         this.retrieveCuisines = this.retrieveCuisines.bind(this);
         this.searchCuisine = this.searchCuisine.bind(this);
         // this.refreshList = this.refreshList.bind(this);
-        // this.setActiveCuisine = this.setActiveCuisine.bind(this);
         this.setActiveRestaurant = this.setActiveRestaurant.bind(this);
-        // this.removeAllTutorials = this.removeAllTutorials.bind(this);
-        // this.getCuisineRestaurants = this.getCuisineRestaurants.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        // this.deleteCuisine = this.deleteCuisine.bind(this);
 
         this.state = {
             user: localStorage.getItem('id'),
@@ -32,6 +29,7 @@ export default class CuisineList extends Component {
 
     componentDidMount() {
         this.retrieveCuisines();
+        this.retrieveRestaurants();
         // this.refreshList();
     }
 
@@ -43,6 +41,19 @@ export default class CuisineList extends Component {
         });
     }
 
+    retrieveRestaurants() {
+        RestaurantDataService.getAll()
+
+            .then(response => {
+                this.setState({
+                    restaurants: response.data
+                });
+                console.log(response.data)
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
 
     retrieveCuisines() {
         RestaurantDataService.getAllCuisines()
@@ -59,15 +70,6 @@ export default class CuisineList extends Component {
             });
     }
 
-    // refreshList() {
-    //     this.retrieveCuisines();
-    //     this.setState({
-    //         currentCuisine: null,
-    //         currentIndex: -1
-    //     })
-    //     // console.log("*** ", this.state.currentIndex)
-    // }
-
     setActiveRestaurant(restaurant, index) {
         this.setState({
             currentRestaurant: restaurant,
@@ -80,7 +82,8 @@ export default class CuisineList extends Component {
         RestaurantDataService.getRestaurants(index)
             .then(response => {
                 this.setState({
-                    restaurants: response.data
+                    restaurants: response.data,
+                    currentRestaurant: null
                 });
                 console.log("cuisine restaurant data ", response.data)
             })
@@ -96,18 +99,6 @@ export default class CuisineList extends Component {
         )
     }
 
-    getCuisineRestaurants(id) {
-        RestaurantDataService.getRestaurants(id)
-            .then(response => {
-                this.setState({
-                    restaurants: response.data
-                });
-                console.log("cuisine restaurant data ", response.data)
-            })
-            .catch(e => {
-                console.log(e);
-            })
-    }
     render() {
         const { cuisines, restaurants, currentRestaurant, currentResIndex} = this.state;
 

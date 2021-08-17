@@ -52,10 +52,12 @@ class App extends Component {
 
         <div>
           <Switch>
+            <Route exact path="/" component={Homepage} />
+
             <Route path="/register" component={Register} />
             <Route path="/login/" component={Login} />
             <Route path="/logout" component={Logout} />
-            <Route path="/whats_to_eat_react" component={Homepage} />
+
             <Route path="/api/restaurants/" component={RestaurantList} />
             <Route path="/restaurants/:id" component={Restaurant} />
             <Route path="/cuisine" component={CuisineList} />
@@ -65,6 +67,8 @@ class App extends Component {
             <div className="main-wrapper">
               <Route exact path="/add" component={MyGoogleMap} />
             </div>
+
+            
           </Switch>
         </div>
       </div>
