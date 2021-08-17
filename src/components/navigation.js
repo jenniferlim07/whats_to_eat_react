@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Switch, Route, NavLink, useLocation } from "react-router-dom";
-import images from '../images/my-logo.jpg';
 import Login from './login';
 import Logout from './logout';
 

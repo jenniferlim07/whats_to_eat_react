@@ -147,7 +147,7 @@ export default class Cuisine extends Component {
         const { currentCuisine } = this.state
 
         return (
-            <div className="app">
+            <div className="ad">
             <div className="card">
                 {currentCuisine ? (
                     <div className="edit-form">

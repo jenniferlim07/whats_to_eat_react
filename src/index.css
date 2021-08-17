@@ -30,6 +30,17 @@ body, html {
     box-sizing: border-box;
 }
 
+.ad {
+    height: 100vh;
+    background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('./images/Zest-Cafe-copy.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .app {
     height: 100%;
     background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('./images/italian-food.jpeg');

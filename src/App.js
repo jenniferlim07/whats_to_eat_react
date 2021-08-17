@@ -1,6 +1,6 @@
 import './App.css';
 import React, { Component, useState, useEffect } from "react";
-import { Route, Switch, Link, NavLink, Nav } from "react-router-dom";
+import { Route, Switch, Link, NavLink, Nav, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import images from './images/my_logo.jpg';
 
@@ -59,11 +59,22 @@ class App extends Component {
 
         <div>
           <Switch>
+            {/* <Route
+                exact
+                path="/"
+                render={() => {
+                    return (
+                      localStorage.getItem('access_token') ?
+                      <Redirect to="/home" /> :
+                      <Redirect to="/login" /> 
+                    )
+                }}
+              /> */}
             <Route path="/register" component={Register} />
             <Route path="/login/" component={Login} />
             <Route path="/logout" component={Logout} />
-            <Route path="/" component={Homepage} />
-            <Route exact path="/restaurants" component={RestaurantList} />
+            <Route path="/whats_to_eat_react" component={Homepage} />
+            <Route path="/restaurants" component={RestaurantList} />
             <Route path="/restaurants/:id" component={Restaurant} />
             <Route path="/cuisine" component={CuisineList} />
             <Route path="/cuisines/:id" component={Cuisine} />

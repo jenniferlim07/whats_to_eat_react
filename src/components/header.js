@@ -43,7 +43,7 @@ function Header() {
 
 						<Link
 							component={NavLink}
-							to="/"
+							to="/whats_to_eat_react"
 							underline="none"
 							color="textPrimary"
 							className="nav-link h5 link-secondary"

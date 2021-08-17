@@ -170,7 +170,7 @@ export default class Restaurant extends Component {
         const { currentRestaurant } = this.state
 
         return (
-            <div className="app">
+            <div className="ad">
             <div className="card">
                 {currentRestaurant ? (
                     <div className="edit-form">
