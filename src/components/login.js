@@ -68,7 +68,7 @@ export default function SignIn() {
 
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
-				history.push('/whats_to_eat_react');
+				history.push('/');
 				console.log(res.data);
 			});
 	};
