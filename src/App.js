@@ -73,11 +73,9 @@ class App extends Component {
             <Route path="/register" component={Register} />
             <Route path="/login/" component={Login} />
             <Route path="/logout" component={Logout} />
-            <Route path="/whats_to_eat_react">
-              <Homepage />
-              </Route>
+
             <Route path="/restaurants">
-              <RestaurantList />
+              <RestaurantList/>
             </Route>
             <Route path="/restaurants/:id" component={Restaurant} />
             <Route path="/cuisine" component={CuisineList} />
@@ -87,6 +85,10 @@ class App extends Component {
             <div className="main-wrapper">
               <Route exact path="/add" component={MyGoogleMap} />
             </div>
+
+            <Route path="/whats_to_eat_react">
+              <Homepage />
+            </Route>
           </Switch>
           {/* <Footer /> */}
         </div>
