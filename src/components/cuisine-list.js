@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import AddCuisine from "./add-cuisine";
 import '../index.css';
 
@@ -165,6 +165,11 @@ export default class CuisineList extends Component {
                                     </label>{" "}
                                     {currentRestaurant.address}
                                 </div>
+                                <Link
+                                    to={"/restaurants/" + currentRestaurant.id}
+                                    className="btn btn-outline-primary btn-sm">
+                                    Edit
+                                </Link>
                             </div>
                         ) : (
                             <div>

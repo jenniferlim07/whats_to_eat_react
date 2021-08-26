@@ -127,7 +127,7 @@ export default class RestaurantList extends Component {
                                     })
                                 }
                                 /> */}
-                                <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                <select className="form-select form-select-lg mb-3"
                                     value={this.state.selectedOption}
                                     onChange={this.handleChange}>
                                     {this.state.cities.map((city, index) => (                                      

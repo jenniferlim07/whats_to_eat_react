@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import RestaurantDataService from "../services/restaurant.service";
+import { Link } from "react-router-dom";
 import '../index.css';
 
 export default class Restaurant extends Component {
@@ -221,7 +222,7 @@ export default class Restaurant extends Component {
                             <div className="container">
                                 <label htmlFor="city">Add Cuisine</label>
                                     <form >
-                                        <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                        <select className="form-select form-select-sm mb-3" aria-label=".form-select-lg example"
                                             value={this.state.cuisine}
                                             onChange={this.handleChange}>
                                             {this.state.cuisines.map((cuisine) => (
@@ -230,14 +231,20 @@ export default class Restaurant extends Component {
                                         </select>
                                     </form>
                             </div>
-
+                            <Link
+                                        // <Route path="/api/restaurants/" component={RestaurantList} />
+                                to={"/api/restaurants/"}
+                                className="btn btn-outline-primary btn-sm">
+                                Back
+                            </Link>
+                            {'  '}
                             <button
                                 type="submit"
                                 className="btn btn-outline-primary btn-sm"
                                 onClick={this.updateRestaurant}>
                                 Update
                             </button>
-
+                            {'  '}
                             <button
                                 type="submit"
                                 className="btn btn-outline-primary btn-sm"
@@ -245,6 +252,7 @@ export default class Restaurant extends Component {
                                 Delete
                             </button>
                         <p>{this.state.message}</p>
+
                     </div>
                 ) : (
                     <div>
